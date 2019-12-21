@@ -1,16 +1,19 @@
-export interface Collection {
-  id: string;
+import { FirebaseItem } from "../firebase/firestore.utils";
+
+export interface Collection extends FirebaseItem {
   title: string;
+  slug?: string;
 }
 
 export interface Bookmark {
-  id: string;
+  key?: string;
+  slug?: string;
   title: string;
   url: string;
   description?: string;
   image?: string;
-  collectionId: string;
-  tags: string[];
+  collectionKey?: string;
+  tags?: string[];
 }
 
 export interface User {

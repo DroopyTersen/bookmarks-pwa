@@ -1,5 +1,6 @@
 import firebaseConfig from "./firebase.config";
 import { User } from "../data/interfaces";
+import { pick } from "lodash";
 
 export async function initFirebase() {
   // Initialize Firebase
@@ -18,8 +19,12 @@ export async function initFirebase() {
   // return window.firebase?.auth()?.currentUser || signInWithFirebase();
 }
 
+export function getDb() {
+  return window.firebase.firestore();
+}
+
 export function getCurrentUser(): User {
-  return window.firebase.auth().currentUser;
+  return pick(window.firebase.auth().currentUser, "uid", "email", "displayName", "photoURL");
 }
 
 export function signInWithFirebaseRedirect() {

@@ -11,10 +11,10 @@ export default function useShareTarget() {
 
   return {
     raw,
-    url,
+    url: linkPreview.url || url,
     image: linkPreview?.image,
     description: linkPreview?.description || raw.description,
-    title: raw.title || linkPreview?.title,
+    title: linkPreview?.title || raw.title,
   };
 }
 

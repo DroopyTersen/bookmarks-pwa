@@ -18,7 +18,7 @@ function Nav({ currentUser }: { currentUser: User }) {
         </Link>
         <div className="nav-links">
           <NavLink path="/three">Collections</NavLink>
-          <NavLink path={testPath}>Share Test</NavLink>
+          <NavLink path={testPath}>Recent</NavLink>
         </div>
       </div>
       <div className="nav-right">
@@ -47,9 +47,14 @@ const StyledNav = styled.nav`
   position: relative;
   z-index: 2;
   text-transform: uppercase;
-  padding: 10px 10px;
+  padding: 5px 10px;
   background: var(--primary-500);
   color: var(--white);
+
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  box-sizing: border-box;
   a {
     text-decoration: none;
   }

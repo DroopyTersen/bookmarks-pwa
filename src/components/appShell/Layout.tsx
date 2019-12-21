@@ -21,5 +21,5 @@ const StyledScreen = styled.div`
   position: relative;
   z-index: 1;
   height: 100%;
-  padding: 0 25px;
+  padding: 60px 25px 0 25px;
 `;

@@ -5,7 +5,7 @@ import "./App.css";
 import ScreenOne from "./screens/ScreenOne";
 import ScreenTwo from "./screens/ScreenTwo";
 import ScreenThree from "./screens/ScreenThree";
-import ShareTarget from "./screens/ShareTarget";
+import NewBookmark from "./screens/NewBookmarkScreen";
 import Nav from "./components/appShell/Nav";
 import { getCurrentUser } from "./firebase/firebase";
 
@@ -17,7 +17,8 @@ function App({}) {
       <React.Suspense fallback={<div>Loading...</div>}>
         <Router>
           <ScreenOne path="/one" default />
-          <ShareTarget path="/share-target" />
+          <NewBookmark path="/share-target" />
+          <NewBookmark path="/new" />
           <ScreenTwo path="/two" />
           <ScreenTwo path="/two/:id" />
           <ScreenThree path="/three" />
