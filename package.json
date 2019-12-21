@@ -1,0 +1,43 @@
+{
+  "name": "bookmarks-pwa",
+  "version": "1.0.0",
+  "description": "App to manage bookmarks",
+  "main": "index.html",
+  "scripts": {
+    "prebuild": "npm run clean && node tasks/build.js",
+    "build": "parcel build src/index.html --detailed-report",
+    "prestart": "node tasks/build.js",
+    "start": "parcel src/index.html --open",
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy --prod --dir=dist",
+    "clean": "rimraf .cache && rimraf dist"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/droopytersen/bookmarks-pwa.git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "Andrew Petersen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/droopytersen/bookmarks-pwa/issues"
+  },
+  "homepage": "https://github.com/droopytersen/bookmarks-pwa#readme",
+  "dependencies": {
+    "@reach/router": "^1.2.1",
+    "date-fns": "^2.8.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "styled-components": "^4.4.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.17",
+    "@types/react-dom": "^16.9.4",
+    "parcel-bundler": "^1.12.4",
+    "parcel-plugin-bundle-visualiser": "^1.2.0",
+    "rimraf": "^3.0.0",
+    "typescript": "^3.7.4"
+  }
+}
