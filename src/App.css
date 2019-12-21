@@ -31,12 +31,17 @@
   --sans-serif: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", Ubuntu, "Droid Sans",
     sans-serif;
 }
+.centered {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 html,
 body,
 #root {
   margin: 0;
   height: 100%;
   background: var(--white);
-  color: var(--white);
+  color: var(--grey-900);
   font-family: var(--sans-serif);
 }

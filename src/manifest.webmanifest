@@ -2,11 +2,19 @@
   "name": "Bookmarker",
   "short_name": "Bookmarker",
   "theme_color": "#e2574c",
-  "background_color": "#e2574c",
+  "background_color": "#faefd3",
   "display": "standalone",
   "orientation": "portrait",
   "Scope": "/",
   "start_url": "/",
+  "share_target": {
+    "action": "/share-target",
+    "params": {
+      "title": "title",
+      "text": "description",
+      "url": "url"
+    }
+  },
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",

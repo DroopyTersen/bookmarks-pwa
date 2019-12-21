@@ -1,20 +1,30 @@
 import React from "react";
-import styled from "@emotion/styled";
+import styled from "styled-components";
 import { Link } from "@reach/router";
 import useLocation from "../../hooks/useLocation";
+import { User } from "../../data/interfaces";
+const logoImage = require("../../images/icons/icon-72x72.png");
 
-function Nav() {
+const testUrl = "https://web.dev/web-share-target/";
+const testPath = `/share-target?description=${testUrl}`;
+function Nav({ currentUser }: { currentUser: User }) {
   return (
     <StyledNav>
       <div className="nav-left">
         <Link to="/">
-          <div className="logo">YOUR LOGO</div>
+          <div className="centered logo">
+            <img src={logoImage} />
+          </div>
         </Link>
         <div className="nav-links">
-          <NavLink path="/one">Screen One</NavLink>
-          <NavLink path="/two/droopy-frontend">Screen Two</NavLink>
-          <NavLink path="/three">Screen Three</NavLink>
+          <NavLink path="/three">Collections</NavLink>
+          <NavLink path={testPath}>Share Test</NavLink>
         </div>
+      </div>
+      <div className="nav-right">
+        <StyledCurrentUser title={currentUser.displayName}>
+          <img src={currentUser.photoURL} />
+        </StyledCurrentUser>
       </div>
     </StyledNav>
   );
@@ -22,6 +32,14 @@ function Nav() {
 
 export default React.memo(Nav);
 
+const StyledCurrentUser = styled.div`
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 4px solid var(--primary-300);
+  }
+`;
 const StyledNav = styled.nav`
   display: flex;
   align-items: center;
@@ -30,18 +48,22 @@ const StyledNav = styled.nav`
   z-index: 2;
   text-transform: uppercase;
   padding: 10px 10px;
-  background: var(--black);
+  background: var(--primary-500);
+  color: var(--white);
   a {
     text-decoration: none;
   }
   .logo {
-    padding: 5px 10px;
-    background: #e6e6e6;
-    border-radius: 16px;
+    background: var(--accent-100);
+    border-radius: 50%;
     margin-right: 10px;
-    color: var(--black);
-    font-weight: bolder;
     text-decoration: none;
+    height: 40px;
+    width: 40px;
+    img {
+      width: 24px;
+      height: 24px;
+    }
   }
   .nav-left,
   .nav-right {
