@@ -1,7 +1,6 @@
 import React from "react";
 import { Router } from "@reach/router";
 
-import "./App.css";
 import ScreenOne from "./screens/ScreenOne";
 import ScreenTwo from "./screens/ScreenTwo";
 import ScreenThree from "./screens/ScreenThree";

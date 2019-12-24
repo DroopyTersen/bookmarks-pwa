@@ -4,6 +4,7 @@ import useSaveBookmark, { BookmarkStatus } from "../../hooks/useSaveBookmark";
 import { SaveButton } from "../primitives/Buttons";
 import Editable from "../Editable/Editable";
 import { Bookmark } from "../../data/interfaces";
+import { Button, Input } from "react-onsenui";
 
 let fallBackImage = require("../../images/icons/icon-192x192.png");
 export default function SaveBookmarkForm({ bookmark: initialBookmark }: SaveBookmarkFormProps) {
@@ -11,9 +12,16 @@ export default function SaveBookmarkForm({ bookmark: initialBookmark }: SaveBook
   return (
     <StyledContainer>
       <>
-        <Editable as="h2" onChange={(val) => update("title", val)}>
+        <TitleInput
+          // className="textarea"
+          modifier="material"
+          onChange={(event) => update("title", event.target.value)}
+          value={bookmark.title}
+          placeholder="Bookmark Title..."
+        />
+        {/* <Editable as="h2" onChange={(val) => update("title", val)}>
           {bookmark.title}
-        </Editable>
+        </Editable> */}
 
         <StyledImageContainer className="centered">
           <img src={bookmark.image || fallBackImage} />
@@ -31,9 +39,15 @@ export default function SaveBookmarkForm({ bookmark: initialBookmark }: SaveBook
           {bookmark.description}
         </Editable>
         <StyledActions>
-          <SaveButton disabled={status !== BookmarkStatus.Valid} type="button" onClick={save}>
+          <Button
+            disabled={status !== BookmarkStatus.Valid}
+            type="button"
+            onClick={save}
+            rippled={true}
+            modifier="large--cta"
+          >
             Save
-          </SaveButton>
+          </Button>
         </StyledActions>
       </>
     </StyledContainer>
@@ -44,7 +58,13 @@ export interface SaveBookmarkFormProps {
   id?: string;
   bookmark?: Bookmark;
 }
-
+const TitleInput = styled(Input)`
+  margin: 32px 0 16px 0;
+  width: 100%;
+  input {
+    font-size: 1.3rem;
+  }
+`;
 const StyledActions = styled.div`
   /* background: var(--secondary-300); */
   position: fixed;
@@ -54,6 +74,7 @@ const StyledActions = styled.div`
   display: flex;
   background: var(--white);
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+  padding: 10px 25px;
 `;
 
 const StyledDescription = styled.p`
