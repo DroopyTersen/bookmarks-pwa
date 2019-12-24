@@ -10,9 +10,9 @@
   --border-color: var(--grey-100);
   --button-background-color: var(--highlight-color);
   --button-cta-background-color: var(--second-highlight-color);
-  --toolbar-background-color: #fafafa;
-  --toolbar-button-color: var(--highlight-color);
-  --toolbar-text-color: var(--black);
+  --toolbar-background-color: var(--brand-500);
+  --toolbar-button-color: var(--white);
+  --toolbar-text-color: var(--white);
   --toolbar-border-color: var(--grey-300);
   --button-bar-color: var(--highlight-color);
   --button-bar-active-text-color: var(--white);
@@ -86,9 +86,9 @@
   --material-range-disabled-thumb-color: #b0b0b0;
   --material-range-disabled-thumb-border-color: #eeeeee;
   --material-range-zero-thumb-color: #f2f2f2;
-  --material-toolbar-background-color: var(--white) fff;
-  --material-toolbar-text-color: #31313a;
-  --material-toolbar-button-color: #1e88e5;
+  --material-toolbar-background-color: var(--brand-500);
+  --material-toolbar-text-color: var(--white);
+  --material-toolbar-button-color: var(--white);
   --material-segment-background-color: #fafafa;
   --material-segment-active-background-color: #c8c8c8;
   --material-segment-text-color: color(black a(38%));
