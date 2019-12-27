@@ -18,7 +18,7 @@ const Link: React.FC<LinkProps> = ({ children, to = "", href = "", ...rest }) =>
     }
   };
   return (
-    <a {...rest} target={href ? "_blank" : "_self"} href={href || to} onClick={onClick}>
+    <a {...rest} href={href || to} onClick={onClick}>
       {children}
     </a>
   );

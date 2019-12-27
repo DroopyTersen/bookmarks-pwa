@@ -1,8 +1,11 @@
 import React, { useEffect } from "react";
 import styled from "styled-components";
-import "@ionic/react/css/core.css";
-import "@ionic/react/css/ionic.bundle.css";
+// import "@ionic/react/css/core.css";
+// import "@ionic/react/css/ionic.bundle.css";
+import "@ionic/core/css/core.css";
+import "@ionic/core/css/ionic.bundle.css";
 import { IonApp } from "@ionic/react";
+// import "ionicons/dist/esm/ion-icon.entry";
 
 const CLASS_NAME = "ionic-app";
 

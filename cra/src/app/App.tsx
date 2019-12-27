@@ -25,10 +25,10 @@ const App: React.FC = () => {
     <FirebaseProvider>
       <IonicApp className="App">
         <Router>
-          <HomeScreen path="/" default />
+          <CollectionsScreen path="/" default />
           <CollectionsScreen path="/collections" />
           <CollectionScreen path="/collections/:slug" />
-          <BookmarkFormScreen path="/share-to" />
+          <BookmarkFormScreen path="/share-target" />
           <BookmarkFormScreen path="/new" />
           <BookmarkFormScreen path="/bookmarks/new" />
           <BookmarkFormScreen path="/bookmarks/edit/:id" />
