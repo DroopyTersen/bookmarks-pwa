@@ -8,6 +8,7 @@ import {
   IonThumbnail,
   IonTitle,
   IonBackButton,
+  IonPage,
 } from "@ionic/react";
 import CollectionsList from "Collections/CollectionsList";
 import { SuspenseWithPerf } from "reactfire";
@@ -38,12 +39,14 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   let cssClass = [CLASS_NAME, className].filter(Boolean).join(" ");
   return (
     <>
-      <AppHeader showBack={showBack} backFallback={backFallback} title={title} />
-      <StyledContent>
-        {/* <SuspenseWithPerf traceId="screen-content" fallback={"Loading..."}> */}
-        {children}
-        {/* </SuspenseWithPerf> */}
-      </StyledContent>
+      <IonPage>
+        <AppHeader showBack={showBack} backFallback={backFallback} title={title} />
+        <IonContent fullscreen={true}>
+          {/* <SuspenseWithPerf traceId="screen-content" fallback={"Loading..."}> */}
+          {children}
+          {/* </SuspenseWithPerf> */}
+        </IonContent>
+      </IonPage>
     </>
   );
 };

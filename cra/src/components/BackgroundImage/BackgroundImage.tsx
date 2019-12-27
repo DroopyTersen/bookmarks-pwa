@@ -8,6 +8,7 @@ export default function BackgroundImage({
   children = null,
   src,
   to = "",
+  href = "",
   className = "",
   ...additionalProps
 }) {
@@ -16,7 +17,7 @@ export default function BackgroundImage({
 
   return (
     <StyledImageContainer {...additionalProps} className={cssClass}>
-      <Link to={to} className={className}>
+      <Link to={to} className={className} href={href}>
         <div className="img" style={imageStyles}>
           {children}
         </div>
@@ -45,5 +46,26 @@ const StyledImageContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+  }
+`;
+
+export const StyledOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.35);
+  /* background: var(--secondary-600); */
+  color: var(--white);
+  text-shadow: 1px 1px 3px #000;
+  font-size: 24px;
+  padding: 2px 5px;
+  text-align: center;
+  a,
+  a:hover,
+  a:active,
+  a:visited {
+    text-decoration: none;
   }
 `;

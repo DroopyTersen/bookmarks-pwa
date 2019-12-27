@@ -4,19 +4,21 @@ import useNavigation from "./useNavigation";
 
 export interface LinkProps {
   // props
-
-  to: string;
+  href?: string;
+  to?: string;
   [key: string]: any;
 }
 
-const Link: React.FC<LinkProps> = ({ children, to = "/", ...rest }) => {
+const Link: React.FC<LinkProps> = ({ children, to = "", href = "", ...rest }) => {
   let { navigate } = useNavigation();
   let onClick = (e) => {
-    navigate(to);
-    e.preventDefault();
+    if (!href) {
+      navigate(to);
+      e.preventDefault();
+    }
   };
   return (
-    <a {...rest} href={to} onClick={onClick}>
+    <a {...rest} target={href ? "_blank" : "_self"} href={href || to} onClick={onClick}>
       {children}
     </a>
   );

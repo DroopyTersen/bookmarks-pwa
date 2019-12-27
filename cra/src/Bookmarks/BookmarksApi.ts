@@ -1,5 +1,5 @@
 import kebabCase from "lodash/kebabCase";
-import { getCurrentUser, getDb, FirebaseUser } from "fire/firebase";
+import { FirebaseUser } from "fire/firebase";
 
 import { getDbItemsByUser, getDbItem, saveDbItem, FirebaseItem } from "fire/firestore.utils";
 
@@ -24,7 +24,7 @@ export default class BookmarksApi {
     this.user = user;
   }
   makeKey = (item: Bookmark) => {
-    return item.slug + getCurrentUser().uid;
+    return item.slug + this.user.uid;
   };
 
   makeSlug = (item: Bookmark) => {
@@ -42,9 +42,6 @@ export default class BookmarksApi {
     if (!item.title) {
       throw new Error("bookmarks.save: You must specify a title");
     }
-    // if (!item.collectionKey) {
-    //   throw new Error("bookmarks.save: You must specifiy a collectionKey");
-    // }
     if (!item.slug) {
       item.slug = this.makeSlug(item);
     }
@@ -59,6 +56,6 @@ export default class BookmarksApi {
     if (!toSave.key) {
       toSave.key = this.makeKey(item);
     }
-    return saveDbItem(this.db, COLLECTION_NAME, toSave) as Promise<Bookmark>;
+    return saveDbItem(this.db, COLLECTION_NAME, toSave, this.user) as Promise<Bookmark>;
   };
 }

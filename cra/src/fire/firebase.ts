@@ -25,14 +25,6 @@ export async function initFirebase() {
   // return window.firebase?.auth()?.currentUser || signInWithFirebase();
 }
 
-export function getDb() {
-  return window.firebase.firestore();
-}
-
-export function getCurrentUser(): FirebaseUser {
-  return pick(window.firebase.auth().currentUser, "uid", "email", "displayName", "photoURL");
-}
-
 export function signInWithFirebaseRedirect() {
   let provider = new window.firebase.auth.GoogleAuthProvider();
   window.firebase

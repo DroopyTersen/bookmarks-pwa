@@ -4,9 +4,9 @@ export const on = (obj: any, ...args: any[]) => obj.addEventListener(...args);
 export const off = (obj: any, ...args: any[]) => obj.removeEventListener(...args);
 
 const patchHistoryMethod = (method) => {
-  const original = history[method];
+  const original = window.history[method];
 
-  history[method] = function(state) {
+  window.history[method] = function(state) {
     const result = original.apply(this, arguments);
     const event = new Event(method.toLowerCase());
 
@@ -37,9 +37,9 @@ export interface LocationSensorState {
 }
 
 const buildState = (trigger: string) => {
-  const { state, length } = history;
+  const { state, length } = window.history;
 
-  const { hash, host, hostname, href, origin, pathname, port, protocol, search } = location;
+  const { hash, host, hostname, href, origin, pathname, port, protocol, search } = window.location;
 
   return {
     trigger,

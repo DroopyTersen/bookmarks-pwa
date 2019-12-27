@@ -17,6 +17,7 @@ import {
   IonButtons,
 } from "@ionic/react";
 import CollectionScreen from "./screens/CollectionScreen";
+import BookmarkFormScreen from "./screens/BookmarkFormScreen";
 
 const App: React.FC = () => {
   return (
@@ -27,6 +28,10 @@ const App: React.FC = () => {
           <HomeScreen path="/" default />
           <CollectionsScreen path="/collections" />
           <CollectionScreen path="/collections/:slug" />
+          <BookmarkFormScreen path="/share-to" />
+          <BookmarkFormScreen path="/new" />
+          <BookmarkFormScreen path="/bookmarks/new" />
+          <BookmarkFormScreen path="/bookmarks/edit/:id" />
         </Router>
       </IonicApp>
     </FirebaseProvider>

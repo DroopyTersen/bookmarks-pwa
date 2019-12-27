@@ -56,7 +56,7 @@ let reducer = function(state: SaveBookmarkState, action: any): SaveBookmarkState
   return state;
 };
 
-export default function useSaveBookmark(initialBookmark?: Bookmark) {
+export default function useSaveBookmark(initialBookmark: Bookmark) {
   let [state, dispatch] = useReducer(reducer, getDefaultState(initialBookmark));
   let { db, currentUser } = useFirebase();
   let api = new BookmarksApi(db, currentUser);

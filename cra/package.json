@@ -18,11 +18,15 @@
     "react-dom": "^16.12.0",
     "react-firebaseui": "^4.0.0",
     "react-scripts": "3.3.0",
+    "react-select": "^3.0.8",
+    "react-use": "^13.12.2",
     "reactfire": "^2.0.0-canary.1fce6b9",
     "styled-components": "^4.4.1",
     "typescript": "~3.7.2"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "netlify deploy --prod --dir=build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
