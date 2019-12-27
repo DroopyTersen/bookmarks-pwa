@@ -41,10 +41,9 @@ export interface FirebaseProviderProps {
   preloadData?: (firebaseApp: firebase.app.App) => Promise<any>;
 }
 const FirebaseProvider: React.FC<FirebaseProviderProps> = ({ children, preloadData, ...rest }) => {
-  let app = useFirebaseApp();
   return (
     <FirebaseAppProvider firebaseConfig={firebaseConfig} initPerformance>
-      <SuspenseWithPerf traceId="load-app" fallback={"Loading..."}>
+      <SuspenseWithPerf traceId="load-app" fallback={""}>
         <InnerApp preloadData={preloadData}>{children}</InnerApp>
       </SuspenseWithPerf>
     </FirebaseAppProvider>

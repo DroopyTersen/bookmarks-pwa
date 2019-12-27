@@ -1,12 +1,7 @@
 import kebabCase from "lodash/kebabCase";
-import { getCurrentUser, getDb } from "fire/firebase";
+import { getCurrentUser, getDb, FirebaseUser } from "fire/firebase";
 
-import {
-  getDbItemsForCurrentUser,
-  getDbItem,
-  saveDbItem,
-  FirebaseItem,
-} from "fire/firestore.utils";
+import { getDbItemsByUser, getDbItem, saveDbItem, FirebaseItem } from "fire/firestore.utils";
 
 export interface Bookmark extends FirebaseItem {
   key?: string;
@@ -23,8 +18,10 @@ const COLLECTION_NAME = "bookmarks";
 
 export default class BookmarksApi {
   db: any;
-  constructor(db: any) {
+  user: FirebaseUser;
+  constructor(db, user: FirebaseUser) {
     this.db = db;
+    this.user = user;
   }
   makeKey = (item: Bookmark) => {
     return item.slug + getCurrentUser().uid;
@@ -34,7 +31,7 @@ export default class BookmarksApi {
     return kebabCase(item.title.slice(0, 60));
   };
   getAll = async (): Promise<Bookmark[]> => {
-    let items = await getDbItemsForCurrentUser(this.db, COLLECTION_NAME);
+    let items = await getDbItemsByUser(this.db, COLLECTION_NAME, this.user);
     return items as Bookmark[];
   };
   getByKey = async (key: string) => {

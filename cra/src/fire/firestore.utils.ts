@@ -1,5 +1,5 @@
 import uuid from "uuid/v4";
-import { getCurrentUser, FirebaseUser } from "./firebase";
+import { FirebaseUser } from "./firebase";
 
 export interface FirestoreDb extends firebase.firestore.Firestore {}
 export interface FirestoreQuery extends firebase.firestore.Query {}
@@ -25,19 +25,30 @@ export const getDbItems = async function(
   return snapshot.docs.map((doc) => doc.data()) as FirebaseItem[];
 };
 
-export const getDbItemsForCurrentUser = async function(
+export const getDbItemsByUser = async function(
   db: FirestoreDb,
   collection: string,
+  user: FirebaseUser,
   query?: (ref: FirestoreQuery) => FirestoreQuery
 ) {
-  console.log("getDbItems", collection);
+  console.log("getDbItemsByUser", collection, user);
   let ref = db
     .collection(collection)
-    .where("createdBy.uid", "==", getCurrentUser().uid)
+    .where("createdBy.uid", "==", user.uid)
     .orderBy("_timestamp", "desc");
   let req = query ? query(ref).get() : ref.get();
   let snapshot = await req;
   return snapshot.docs.map((doc) => doc.data()) as FirebaseItem[];
+};
+
+export const byCreatedBy = function(db: FirestoreDb, collection, user: FirebaseUser) {
+  if (!db || !db.collection) return null;
+  let ref = db
+    .collection(collection)
+    .where("createdBy.uid", "==", user.uid)
+    .orderBy("_timestamp", "desc");
+
+  return ref;
 };
 
 export const getDbItem = async function(
@@ -67,7 +78,12 @@ export const removeDbItem = async function(db: FirestoreDb, collection: string, 
     .delete();
 };
 
-export const saveDbItem = async function(db: FirestoreDb, collection: string, item: FirebaseItem) {
+export const saveDbItem = async function(
+  db: FirestoreDb,
+  collection: string,
+  item: FirebaseItem,
+  createdBy?: FirebaseUser
+) {
   item._timestamp = Date.now();
   item.modified = new Date().toISOString();
 
@@ -77,8 +93,8 @@ export const saveDbItem = async function(db: FirestoreDb, collection: string, it
   if (!item.created) {
     item.created = new Date().toISOString();
   }
-  if (!item.createdBy) {
-    item.createdBy = getCurrentUser();
+  if (!item.createdBy && createdBy) {
+    item.createdBy = createdBy;
   }
   console.log("Saving DB item", item);
   await db
@@ -97,7 +113,12 @@ export const subscribe = (dbRef: any, handler: (type, item) => void) => {
   });
 };
 
-export const saveDbItems = async function(db, collection, items: FirebaseItem[]) {
+export const saveDbItems = async function(
+  db,
+  collection,
+  items: FirebaseItem[],
+  createdBy: FirebaseUser
+) {
   let batch = db.batch();
   items.forEach((item) => {
     if (!item.key) {
@@ -106,8 +127,8 @@ export const saveDbItems = async function(db, collection, items: FirebaseItem[])
     if (!item.created) {
       item.created = new Date().toISOString();
     }
-    if (!item.createdBy) {
-      item.createdBy = getCurrentUser();
+    if (!item.createdBy && createdBy) {
+      item.createdBy = createdBy;
     }
     item._timestamp = Date.now();
     let ref = db.collection(collection).doc(item.key);

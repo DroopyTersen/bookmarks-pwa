@@ -1,26 +1,25 @@
-import { FirebaseItem, saveDbItem, getDbItemsForCurrentUser } from "fire/firestore.utils";
-import { getCurrentUser } from "fire/firebase";
+import { FirebaseItem, saveDbItem, getDbItemsByUser } from "fire/firestore.utils";
+import { FirebaseUser } from "fire/firebase";
 import kebabCase from "lodash/kebabCase";
 
 export interface Collection extends FirebaseItem {
   title: string;
+  image?: string;
   slug?: string;
 }
 
 export class CollectionsApi {
   db: any;
-  constructor(db) {
+  user: FirebaseUser;
+  constructor(db, user: FirebaseUser) {
     this.db = db;
+    this.user = user;
   }
   makeKey = (item: Collection) => {
-    return item.slug + getCurrentUser().uid;
+    return item.slug + this.user.uid;
   };
   getAll = async (): Promise<Collection[]> => {
-    let items = await getDbItemsForCurrentUser(this.db, "collections");
-    if (!items || !items.length) {
-      await this.createDefaultItems();
-      items = await getDbItemsForCurrentUser(this.db, "collections");
-    }
+    let items = await getDbItemsByUser(this.db, "collections", this.user);
     return items as Collection[];
   };
   getByTitle = async (title: string) => {
@@ -43,13 +42,26 @@ export class CollectionsApi {
     if (!toSave.key) {
       toSave.key = this.makeKey(item);
     }
-    return saveDbItem(this.db, "collections", toSave) as Promise<Collection>;
+    console.log("Saving", toSave);
+    return saveDbItem(this.db, "collections", toSave, this.user) as Promise<Collection>;
   };
   createDefaultItems = async () => {
     return Promise.all([
-      this.save({ title: "To Read" }),
-      this.save({ title: "To Watch" }),
-      this.save({ title: "Curated" }),
+      this.save({
+        title: "To Read",
+        image:
+          "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1350&q=80",
+      }),
+      this.save({
+        title: "To Watch",
+        image:
+          "https://images.unsplash.com/photo-1548328928-34db1c5fcc1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+      }),
+      this.save({
+        title: "Curated",
+        image:
+          "https://images.unsplash.com/photo-1529957018945-07aed3538ad5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+      }),
     ]);
   };
 }

@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 import { previewLink } from "linkPreview/linkPreview.api";
 import { useDatabase } from "reactfire";
 import BookmarksApi, { Bookmark } from "Bookmarks/BookmarksApi";
+import { useFirebase } from "fire/useFirebase";
 
 let reducer = function(state: SaveBookmarkState, action: any): SaveBookmarkState {
   var bookmark: Bookmark = null;
@@ -57,8 +58,8 @@ let reducer = function(state: SaveBookmarkState, action: any): SaveBookmarkState
 
 export default function useSaveBookmark(initialBookmark?: Bookmark) {
   let [state, dispatch] = useReducer(reducer, getDefaultState(initialBookmark));
-  let db = useDatabase();
-  let api = new BookmarksApi(db);
+  let { db, currentUser } = useFirebase();
+  let api = new BookmarksApi(db, currentUser);
 
   useEffect(() => {
     let isMounted = true;
