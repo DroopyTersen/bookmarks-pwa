@@ -93,7 +93,7 @@ export const StyledPage = styled(IonPage)`
   background: linear-gradient(-13deg, #efc75e 10%, #e2574c 75%);
   --ion-background-color: transparent;
   --ion-text-color: var(--white);
-  --ion-border-color: rgba(255, 255, 255, 0.3);
+  /* --ion-border-color: rgba(255, 255, 255, 0.3); */
   ion-header.header-md:after {
     display: none;
   }

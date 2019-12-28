@@ -28,8 +28,10 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
   return (
     <StyledContainer>
       <StyledForm>
-        <IonItem>
-          <IonLabel position="floating">Url</IonLabel>
+        <StyledFormControl>
+          <IonLabel color="light" position="stacked">
+            Url
+          </IonLabel>
           <StyledTextArea
             className="monospace"
             placeholder="Bookmark url..."
@@ -38,15 +40,15 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
             value={bookmark.url}
             onIonBlur={(event: any) => update("url", event.target.value)}
           ></StyledTextArea>
-        </IonItem>
-        <StyledPicker>
-          {/* <IonLabel position="floating">Category</IonLabel> */}
+        </StyledFormControl>
+        {/* <StyledPicker>
           <CollectionPicker
             value={bookmark.collectionKey}
             onChange={(val) => update("collectionKey", val)}
           />
-        </StyledPicker>
-        <IonItem>
+        </StyledPicker> */}
+
+        <StyledFormControl>
           <IonLabel position="floating">Title</IonLabel>
           <StyledTextArea
             className="title"
@@ -56,9 +58,9 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
             value={bookmark.title}
             onIonChange={(event: any) => update("title", event.target.value)}
           ></StyledTextArea>
-        </IonItem>
+        </StyledFormControl>
 
-        <IonItem>
+        <StyledFormControl>
           <IonLabel position="floating">Description</IonLabel>
           <StyledTextArea
             name="description"
@@ -66,14 +68,15 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
             required={true}
             rows={6}
             value={bookmark.description}
+            clearInput={true}
             onIonChange={(event: any) => update("description", event.target.value)}
           ></StyledTextArea>
-        </IonItem>
+        </StyledFormControl>
 
         <StyledImageContainer className="centered">
           <img src={bookmark.image || fallBackImage} />
         </StyledImageContainer>
-        <IonItem>
+        <StyledFormControl>
           <IonLabel position="floating">Image</IonLabel>
           <StyledTextArea
             className="monospace"
@@ -81,23 +84,23 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
             rows={4}
             name="image"
             value={bookmark.image}
+            clearInput={true}
             onIonChange={(event: any) => update("image", event.target.value)}
           ></StyledTextArea>
-        </IonItem>
+        </StyledFormControl>
 
-        <IonItem>
-          <IonButton
-            size="default"
-            expand="block"
-            color="primary"
-            fill="outline"
-            style={{ margin: "0 auto" }}
-            disabled={status !== BookmarkStatus.Valid}
-            onClick={handleSave}
-          >
-            Save
-          </IonButton>
-        </IonItem>
+        {/* <StyledFormControl> */}
+        <StyledSaveButton
+          size="large"
+          expand="block"
+          color="secondary"
+          // fill="outline"
+          disabled={status !== BookmarkStatus.Valid}
+          onClick={handleSave}
+        >
+          Save
+        </StyledSaveButton>
+        {/* </StyledFormControl> */}
       </StyledForm>
     </StyledContainer>
   );
@@ -107,39 +110,38 @@ export interface BookmarkFormProps {
   bookmark?: Bookmark;
 }
 
-const StyledForm = styled(IonCard)`
-  --ion-background-color: var(--white);
-  --ion-text-color: var(--black);
-  background: var(--white);
+const StyledFormControl = styled(IonItem)`
+  /* padding: 10px;
+  border-bottom: none;
+  border-bottom-color; */
+  --ion-border-color: transparent;
+  padding: 3px 0 16px 0px;
 `;
 
-const StyledPicker = styled.div`
-  position: relative;
-  padding: 15px 16px 5px;
-`;
-
+// const StyledForm = styled(IonCard)`
 const StyledTextArea = styled(IonTextarea)`
   font-size: 14px;
+  box-sizing: border-box;
+  padding: 10px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  /* border: 1px solid rgba(0, 0, 0, 0.11); */
+  .item-has-focus & {
+    /* background: rgba(0, 0, 0, 0.07); */
+    /* border: 1px solid var(--accent-500); */
+  }
   &.title {
     font-size: 20px;
   }
 `;
 
-const StyledActions = styled.div`
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  background: var(--white);
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-  padding: 6px 12px;
-  z-index: 3;
-  ion-button {
-    width: 100%;
-  }
+const StyledForm = styled.div`
+  --ion-color-primary: var(--white);
 `;
 
+const StyledSaveButton = styled(IonButton)`
+  margin: 0 16px;
+`;
 const StyledContainer = styled.div`
   padding-bottom: 80px;
 

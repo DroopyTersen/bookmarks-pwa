@@ -22,6 +22,12 @@ let reducer = function(state: SaveBookmarkState, action: any): SaveBookmarkState
         bookmark,
         status: validateBookmark(bookmark) ? BookmarkStatus.Valid : BookmarkStatus.Incomplete,
       };
+    case "link-preview-error":
+      return {
+        ...state,
+        bookmark: state.bookmark,
+        status: validateBookmark(bookmark) ? BookmarkStatus.Valid : BookmarkStatus.Incomplete,
+      };
     case "update-bookmark":
       bookmark = {
         ...state.bookmark,
@@ -65,9 +71,14 @@ export default function useSaveBookmark(initialBookmark: Bookmark) {
     let isMounted = true;
     let fetchPreview = async () => {
       dispatch({ type: "link-preview-start" });
-      let linkPreview = await previewLink(state.bookmark.url);
-      if (isMounted) {
-        dispatch({ type: "link-preview-result", linkPreview });
+      try {
+        let linkPreview = await previewLink(state.bookmark.url);
+        if (isMounted) {
+          dispatch({ type: "link-preview-result", linkPreview });
+        }
+      } catch (err) {
+        console.log("Link Preivew Error", err);
+        dispatch({ type: "link-preview-error" });
       }
     };
     if (state.bookmark.url) {
