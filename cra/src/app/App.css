@@ -96,7 +96,10 @@
   --ion-color-light-shade: #dedfe0;
   --ion-color-light-tint: #fcfdff;
 }
-
+.monospace {
+  font-family: var(--monospace);
+  word-wrap: break-word;
+}
 .centered {
   display: flex;
   justify-content: center;

@@ -4,6 +4,7 @@ import CollectionsList from "Collections/CollectionsList";
 import useCollections from "Collections/useCollections";
 import { IonTitle } from "@ionic/react";
 import BookmarksList from "Bookmarks/BookmarksList";
+import NewBookmarkFab from "Bookmarks/NewBookmarkFab";
 
 function CollectionScreen({ slug = "", ...rest }) {
   let { items } = useCollections();
@@ -12,6 +13,7 @@ function CollectionScreen({ slug = "", ...rest }) {
   return (
     <ScreenLayout title={collection.title} backFallback={"/collections"}>
       <BookmarksList collectionKey={collection.key} />
+      <NewBookmarkFab collection={collection.key} />
     </ScreenLayout>
   );
 }

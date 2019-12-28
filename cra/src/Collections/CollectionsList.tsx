@@ -5,12 +5,12 @@ import Grid from "components/Grid/Grid";
 import styled from "styled-components";
 
 import BackgroundImage, { StyledOverlay } from "components/BackgroundImage/BackgroundImage";
-import { IonButton, IonActionSheet } from "@ionic/react";
+import { IonButton, IonActionSheet, IonCard } from "@ionic/react";
 import Icon from "components/primitives/Icon";
 import useNavigation from "navigation/useNavigation";
 
 function CollectionsList({}: CollectionsListProps) {
-  let { items } = useCollections();
+  let { items, remove } = useCollections();
   let width = "150px";
   let height = width;
   let { navigate } = useNavigation();
@@ -18,29 +18,40 @@ function CollectionsList({}: CollectionsListProps) {
 
   return (
     <>
-      <Grid className="collections-list" gap={1} size="150px">
-        {items.map((item) => (
-          <StyledImage
-            style={{ height }}
-            src={item.image}
-            key={item.key}
-            to={"/collections/" + item.slug}
-          >
-            <StyledOverlay className="centered">{item.title}</StyledOverlay>
-            <StyledActionButton
-              fill="clear"
-              onClick={(e) => {
-                e.preventDefault();
-                e.stopPropagation();
-                setActionSheetKey(item.key);
-                return false;
-              }}
+      <StyledGridContainer>
+        <Grid className="collections-list" gap={1} size="150px">
+          {items.map((item) => (
+            <StyledImage
+              style={{ height }}
+              src={item.image}
+              key={item.key}
+              to={"/collections/" + item.slug}
             >
-              <Icon name="more" />
-            </StyledActionButton>
-          </StyledImage>
-        ))}
-      </Grid>
+              <StyledOverlay className="centered">{item.title}</StyledOverlay>
+              <StyledActionButton
+                fill="clear"
+                onClick={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  setActionSheetKey(item.key);
+                  return false;
+                }}
+              >
+                <Icon name="more" />
+              </StyledActionButton>
+            </StyledImage>
+          ))}
+        </Grid>
+      </StyledGridContainer>
+      <IonButton
+        onClick={() => navigate("/collections/new")}
+        expand="block"
+        fill="outline"
+        style={{ margin: "15px 10px" }}
+      >
+        <Icon name="add" size="14px" />
+        New Collection
+      </IonButton>
       <IonActionSheet
         header={items.find((c) => c.key === actionSheetKey)?.title}
         isOpen={!!actionSheetKey}
@@ -58,7 +69,7 @@ function CollectionsList({}: CollectionsListProps) {
             // icon: "trash",
             role: "destructive",
             handler: () => {
-              alert("Delete Item!" + actionSheetKey);
+              remove(actionSheetKey);
             },
           },
         ]}
@@ -75,6 +86,10 @@ let StyledImage = styled(BackgroundImage)`
 export interface CollectionsListProps {
   //props
 }
+
+const StyledGridContainer = styled(IonCard)`
+  background: var(--white);
+`;
 
 const StyledActionButton = styled(IonButton)`
   position: absolute;

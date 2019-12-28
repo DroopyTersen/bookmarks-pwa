@@ -28,7 +28,7 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
 
 export default React.memo(BookmarksList);
 const StyledMessage = styled.p`
-  color: var(--grey-500);
+  /* color: var(--white); */
   font-style: italic;
   padding: 0 16px;
 `;

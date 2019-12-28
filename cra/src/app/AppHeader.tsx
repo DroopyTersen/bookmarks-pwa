@@ -11,6 +11,7 @@ export interface AppHeaderProps {
   title: string;
   showBack: Boolean;
   backFallback: string;
+  backUrl?: string;
   className?: string;
   [key: string]: any;
 }
@@ -20,6 +21,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   className = "",
   showBack = true,
   backFallback = "/",
+  backUrl = "",
   title = "Bookmarker",
   ...rest
 }) => {
@@ -28,7 +30,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
     <IonHeader>
       <IonToolbar color="primary">
         <IonButtons slot="start">
-          {showBack && <BackButton fallback={backFallback} />}
+          {showBack && <BackButton fallback={backFallback} url={backUrl} />}
           {!showBack && (
             <LogoContainer className="centered">
               <img src="/images/icons/icon-72x72.png" />

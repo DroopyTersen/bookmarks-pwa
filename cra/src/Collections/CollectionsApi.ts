@@ -1,4 +1,10 @@
-import { FirebaseItem, saveDbItem, getDbItemsByUser, getDbItem } from "fire/firestore.utils";
+import {
+  FirebaseItem,
+  saveDbItem,
+  getDbItemsByUser,
+  getDbItem,
+  removeDbItem,
+} from "fire/firestore.utils";
 import { FirebaseUser } from "fire/firebase";
 import kebabCase from "lodash/kebabCase";
 
@@ -30,6 +36,9 @@ export class CollectionsApi {
   };
   getByKey = async (key: string) => {
     return getDbItem(this.db, "collections", key);
+  };
+  remove = async (key: string) => {
+    return removeDbItem(this.db, "collections", key);
   };
   save = async (item: Collection): Promise<Collection> => {
     if (!item.title) {

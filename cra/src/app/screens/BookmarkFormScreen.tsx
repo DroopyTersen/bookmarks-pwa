@@ -23,8 +23,10 @@ export interface ShareTargetData {
 const getBookmarkFromQueryString = (url: string) => {
   let shareData = getSharedDataFromQueryString(url);
   let sharedUrl = shareData.url || (checkIsUrl(shareData.description) ? shareData.description : "");
+  const parsedUrl = new URL(url);
 
   let bookmark: Bookmark = {
+    collectionKey: parsedUrl.searchParams.get("collection"),
     image: "/images/fallback.png",
     title: "",
     ...shareData,

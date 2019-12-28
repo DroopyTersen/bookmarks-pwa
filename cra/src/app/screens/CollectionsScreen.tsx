@@ -6,9 +6,8 @@ import NewCollectionFab from "Collections/NewCollectionFab";
 
 function CollectionsScreen({ ...rest }) {
   return (
-    <ScreenLayout title="Collections">
+    <ScreenLayout title="Collections" backUrl="/">
       <CollectionsList />
-      <NewCollectionFab />
     </ScreenLayout>
   );
 }

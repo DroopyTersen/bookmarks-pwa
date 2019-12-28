@@ -32,6 +32,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   className = "",
   title = "Boomarker",
   showBack = true,
+  backUrl = "",
   backFallback = "/",
   ...rest
 }) => {
@@ -40,7 +41,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   return (
     <>
       <StyledPage>
-        <AppHeader showBack={showBack} backFallback={backFallback} title={title} />
+        <AppHeader showBack={showBack} backFallback={backFallback} backUrl="" title={title} />
         <StyledContent fullscreen={true}>
           {/* <SuspenseWithPerf traceId="screen-content" fallback={"Loading..."}> */}
           {children}
@@ -57,11 +58,15 @@ export const StyledPage = styled(IonPage)`
   background: linear-gradient(-13deg, #efc75e 10%, #e2574c 75%);
   --ion-background-color: transparent;
   --ion-text-color: var(--white);
+
   ion-header.header-md:after {
     display: none;
   }
 `;
-const StyledContent = styled(IonContent)`
+export const StyledContent = styled(IonContent)`
+  /* padding-bottom: 60px; */
+  --offset-bottom: 100px;
+  --padding-bottom: 100px;
   /* background: linear-gradient(0deg, #528ba0, #e2574c); */
   /* background: linear-gradient(-13deg, #efc75e 10%, #e2574c 90%);
   --ion-background-color: transparent; */
