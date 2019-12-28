@@ -8,6 +8,7 @@ import {
 import { FirebaseUser } from "fire/firebase";
 import kebabCase from "lodash/kebabCase";
 
+import debounce from "lodash/debounce";
 export interface Collection extends FirebaseItem {
   title: string;
   image?: string;
@@ -62,23 +63,33 @@ export class CollectionsApi {
     console.log("Saving", toSave);
     return saveDbItem(this.db, "collections", toSave, this.user) as Promise<Collection>;
   };
-  createDefaultItems = async () => {
+}
+
+export let createDefaultCollections = debounce(async (api: CollectionsApi) => {
+  let items = await api.getAll();
+  if (items.length === 0) {
     return Promise.all([
-      this.save({
+      api.save({
         title: "To Read",
-        image:
-          "https://images.unsplash.com/photo-1457369804613-52c61a468e7d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjF9&auto=format&fit=crop&w=1350&q=80",
+        sortOrder: 1,
+        image: "https://cdn.pixabay.com/photo/2016/09/10/17/18/book-1659717_960_720.jpg",
       }),
-      this.save({
+      api.save({
         title: "To Watch",
-        image:
-          "https://images.unsplash.com/photo-1548328928-34db1c5fcc1f?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80",
+        sortOrder: 2,
+        image: "https://cdn.pixabay.com/photo/2017/08/10/03/00/youtube-2617510_960_720.jpg",
       }),
-      this.save({
-        title: "Curated",
-        image:
-          "https://images.unsplash.com/photo-1529957018945-07aed3538ad5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=634&q=80",
+
+      api.save({
+        title: "Recipes",
+        sortOrder: 30,
+        image: "https://cdn.pixabay.com/photo/2015/10/26/07/21/soup-1006694_960_720.jpg",
+      }),
+      api.save({
+        title: "Travel",
+        sortOrder: 40,
+        image: "https://cdn.pixabay.com/photo/2016/01/09/18/27/old-1130731_960_720.jpg",
       }),
     ]);
-  };
-}
+  }
+}, 500);

@@ -13,7 +13,7 @@ function CollectionScreen({ slug = "", ...rest }) {
   return (
     <ScreenLayout title={collection.title} backFallback={"/collections"}>
       <BookmarksList collectionKey={collection.key} />
-      <NewBookmarkFab collection={collection.key} />
+      {/* <NewBookmarkFab collection={collection.key} /> */}
     </ScreenLayout>
   );
 }

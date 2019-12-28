@@ -19,6 +19,8 @@ import {
 import CollectionScreen from "./screens/CollectionScreen";
 import BookmarkFormScreen from "./screens/BookmarkFormScreen";
 import CollectionFormScreen from "./screens/CollectionFormScreen";
+import LoginScreen from "./screens/LoginScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 
 const App: React.FC = () => {
   return (
@@ -36,6 +38,9 @@ const App: React.FC = () => {
           <BookmarkFormScreen path="/new" />
           <BookmarkFormScreen path="/bookmarks/new" />
           <BookmarkFormScreen path="/bookmarks/edit/:id" title="Edit Bookmark" />
+          <LoginScreen path="/login" />
+          <ProfileScreen path="/profile" />
+          <ProfileScreen path="/sign-out" />
         </Router>
       </IonicApp>
     </FirebaseProvider>

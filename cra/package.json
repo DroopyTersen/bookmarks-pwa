@@ -21,6 +21,7 @@
     "react-firebaseui": "^4.0.0",
     "react-scripts": "3.3.0",
     "react-select": "^3.0.8",
+    "react-sidebar": "^3.0.2",
     "react-use": "^13.12.2",
     "reactfire": "^2.0.0-canary.1fce6b9",
     "styled-components": "^4.4.1",
@@ -50,6 +51,7 @@
     ]
   },
   "devDependencies": {
+    "@types/react-sidebar": "^3.0.0",
     "progress-bar-webpack-plugin": "^1.12.1",
     "webpack-bundle-analyzer": "^3.6.0"
   }

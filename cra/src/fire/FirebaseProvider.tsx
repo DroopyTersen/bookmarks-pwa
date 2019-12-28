@@ -12,7 +12,7 @@ import {
   preloadDatabase,
   preloadStorage,
 } from "reactfire";
-import { AuthButton } from "./FirebaseAuth";
+import LoginScreen from "app/screens/LoginScreen";
 
 // Our components will lazy load the
 // SDKs to decrease their bundle size.
@@ -67,7 +67,7 @@ const InnerApp: React.FC<InnerAppProps> = ({
   preloadSDKs(firebaseApp).then((firebaseApp) => preloadData(firebaseApp));
   return (
     <>
-      <AuthCheck fallback={<AuthButton />}>{children}</AuthCheck>
+      <AuthCheck fallback={<LoginScreen />}>{children}</AuthCheck>
     </>
   );
 };

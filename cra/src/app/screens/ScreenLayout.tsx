@@ -9,17 +9,22 @@ import {
   IonTitle,
   IonBackButton,
   IonPage,
+  IonFooter,
+  IonButton,
 } from "@ionic/react";
 import CollectionsList from "Collections/CollectionsList";
 import { SuspenseWithPerf } from "reactfire";
 import BackButton from "navigation/BackButton";
 import AppHeader from "app/AppHeader";
+import Icon from "components/primitives/Icon";
+import useNavigation from "navigation/useNavigation";
+import MenuWrapper, { useMenu } from "navigation/MenuWrapper";
 
 const CLASS_NAME = "screen";
 
 export interface ScreenLayoutProps {
   // props
-  title: string;
+  title?: string;
   className?: string;
   showBack?: Boolean;
   backFallback?: string;
@@ -34,31 +39,61 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   showBack = true,
   backUrl = "",
   backFallback = "/",
+  hideHeader = false,
   ...rest
 }) => {
   console.log("RENDERING", title);
+  let { navigate } = useNavigation();
   let cssClass = [CLASS_NAME, className].filter(Boolean).join(" ");
   return (
     <>
-      <StyledPage>
-        <AppHeader showBack={showBack} backFallback={backFallback} backUrl="" title={title} />
-        <StyledContent fullscreen={true}>
-          {/* <SuspenseWithPerf traceId="screen-content" fallback={"Loading..."}> */}
-          {children}
-          {/* </SuspenseWithPerf> */}
-        </StyledContent>
-      </StyledPage>
+      <MenuWrapper>
+        <StyledPage>
+          {!hideHeader && (
+            <AppHeader showBack={showBack} backFallback={backFallback} backUrl="" title={title} />
+          )}
+          <StyledContent fullscreen={true}>
+            {/* <SuspenseWithPerf traceId="screen-content" fallback={"Loading..."}> */}
+            {children}
+            {/* </SuspenseWithPerf> */}
+          </StyledContent>
+          <Footer />
+        </StyledPage>
+      </MenuWrapper>
     </>
   );
 };
 
+function Footer() {
+  let menu = useMenu();
+  let { navigate } = useNavigation();
+
+  return (
+    <StyledFooter>
+      <IonToolbar>
+        <IonButtons slot="start">
+          <IonButton onClick={menu.toggleOpen}>
+            <Icon name="menu"></Icon>
+          </IonButton>
+        </IonButtons>
+        <IonButtons slot="end" onClick={() => navigate("/new")}>
+          <IonButton fill="outline">+ New</IonButton>
+        </IonButtons>
+      </IonToolbar>
+    </StyledFooter>
+  );
+}
 export default ScreenLayout;
 
+const StyledFooter = styled(IonFooter)`
+  z-index: 2;
+  background: var(--accent-500);
+`;
 export const StyledPage = styled(IonPage)`
   background: linear-gradient(-13deg, #efc75e 10%, #e2574c 75%);
   --ion-background-color: transparent;
   --ion-text-color: var(--white);
-
+  --ion-border-color: rgba(255, 255, 255, 0.3);
   ion-header.header-md:after {
     display: none;
   }

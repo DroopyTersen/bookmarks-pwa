@@ -14,7 +14,7 @@ export default function BackgroundImage({
 }) {
   let cssClass = [CLASS_NAME, className].filter(Boolean).join(" ");
   let imageStyles = { backgroundImage: `url('${src}')` };
-  let LinkElem = to || href ? Link : "span";
+  let LinkElem = to || href ? Link : React.Fragment;
   return (
     <StyledImageContainer {...additionalProps} className={cssClass}>
       <LinkElem to={to} className={className} href={href}>

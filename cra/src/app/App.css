@@ -96,6 +96,9 @@
   --ion-color-light-shade: #dedfe0;
   --ion-color-light-tint: #fcfdff;
 }
+.bookmarker-menu-sidebar {
+  background: linear-gradient(-77deg, var(--secondary-800), var(--secondary-600));
+}
 .box-shadow {
   box-shadow: var(--box-shadow);
 }
