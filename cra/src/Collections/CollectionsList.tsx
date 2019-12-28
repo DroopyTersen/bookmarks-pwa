@@ -89,6 +89,7 @@ export interface CollectionsListProps {
 
 const StyledGridContainer = styled(IonCard)`
   background: var(--white);
+  --ion-font-family: "Slabo 27px";
 `;
 
 const StyledActionButton = styled(IonButton)`

@@ -1,7 +1,13 @@
 import kebabCase from "lodash/kebabCase";
 import { FirebaseUser } from "fire/firebase";
 
-import { getDbItemsByUser, getDbItem, saveDbItem, FirebaseItem } from "fire/firestore.utils";
+import {
+  getDbItemsByUser,
+  getDbItem,
+  saveDbItem,
+  FirebaseItem,
+  removeDbItem,
+} from "fire/firestore.utils";
 
 export interface Bookmark extends FirebaseItem {
   key?: string;
@@ -37,7 +43,7 @@ export default class BookmarksApi {
   getByKey = async (key: string) => {
     return getDbItem(this.db, COLLECTION_NAME, key) as Promise<Bookmark>;
   };
-
+  remove = async (key: string) => removeDbItem(this.db, COLLECTION_NAME, key);
   save = async (item: Bookmark): Promise<Bookmark> => {
     if (!item.title) {
       throw new Error("bookmarks.save: You must specify a title");

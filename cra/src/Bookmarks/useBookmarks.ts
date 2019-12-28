@@ -4,11 +4,11 @@ import { byCreatedBy } from "fire/firestore.utils";
 import orderBy from "lodash/orderBy";
 import { useFirebase } from "fire/useFirebase";
 import { useFirestoreCollectionData } from "reactfire";
-import { Bookmark } from "./BookmarksApi";
+import BookmarksApi, { Bookmark } from "./BookmarksApi";
 export default function useBookmarks({ collection = "" }) {
   let { db, currentUser } = useFirebase();
   let query = byCreatedBy(db, "bookmarks", currentUser);
-
+  let api = new BookmarksApi(db, currentUser);
   let data: Bookmark[] = useFirestoreCollectionData(query);
   console.log(data, collection);
   if (collection) {
@@ -16,5 +16,6 @@ export default function useBookmarks({ collection = "" }) {
   }
   return {
     bookmarks: data as Bookmark[],
+    remove: api.remove,
   };
 }

@@ -68,4 +68,5 @@ const CenteredTitle = styled(IonTitle)`
   text-align: center;
   top: 0;
   bottom: 0;
+  /* font-family: "Slabo 27px"; */
 `;

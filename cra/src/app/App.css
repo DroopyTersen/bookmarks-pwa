@@ -96,6 +96,9 @@
   --ion-color-light-shade: #dedfe0;
   --ion-color-light-tint: #fcfdff;
 }
+.box-shadow {
+  box-shadow: var(--box-shadow);
+}
 .monospace {
   font-family: var(--monospace);
   word-wrap: break-word;
