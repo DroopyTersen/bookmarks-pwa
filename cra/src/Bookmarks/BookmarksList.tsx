@@ -2,12 +2,13 @@ import React, { useState } from "react";
 import Link from "navigation/Link";
 import Grid from "components/Grid/Grid";
 import styled from "styled-components";
-
+import { parse as parseUrl } from "url";
 import BackgroundImage, { StyledOverlay } from "components/BackgroundImage/BackgroundImage";
 import useBookmarks from "./useBookmarks";
-import { IonActionSheet, IonButton, IonCard } from "@ionic/react";
+import { IonActionSheet, IonButton, IonCard, IonCardContent, IonCardSubtitle } from "@ionic/react";
 import useNavigation from "navigation/useNavigation";
 import Icon from "components/primitives/Icon";
+import format from "date-fns/format";
 
 function BookmarksList({ collectionKey }: CollectionsListProps) {
   let { bookmarks, remove } = useBookmarks({ collection: collectionKey });
@@ -26,26 +27,33 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
       <StyledGridContainer>
         <Grid className="bookmarks-list" gap={1} size={width}>
           {bookmarks.map((item) => (
-            <BackgroundImage
-              className="box-shadow"
-              style={{ height }}
-              src={item.image}
-              key={item.key}
-              href={item.url}
-            >
-              <Caption>{item.title}</Caption>
-              <StyledActionButton
-                fill="clear"
-                onClick={(e) => {
-                  e.preventDefault();
-                  e.stopPropagation();
-                  setActionSheetKey(item.key);
-                  return false;
-                }}
-              >
-                <Icon name="more" />
-              </StyledActionButton>
-            </BackgroundImage>
+            <StyledCard>
+              <BackgroundImage style={{ height }} src={item.image} key={item.key} href={item.url}>
+                <Caption>{item.title}</Caption>
+                <StyledActionButton
+                  fill="clear"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    setActionSheetKey(item.key);
+                    return false;
+                  }}
+                >
+                  <Icon name="more" />
+                </StyledActionButton>
+              </BackgroundImage>
+              <IonCardContent>
+                <div className="info">
+                  <div>
+                    <a href={item.url} className="url monospace">
+                      {parseUrl(item.url).hostname}
+                    </a>
+                  </div>
+                  <IonCardSubtitle>{format(new Date(item.created), "MM/dd/yyyy")}</IonCardSubtitle>
+                </div>
+                <p>{item.description}</p>
+              </IonCardContent>
+            </StyledCard>
           ))}
         </Grid>
       </StyledGridContainer>
@@ -80,14 +88,22 @@ const Caption = styled(StyledOverlay)`
   align-items: flex-end;
   text-align: left;
   justify-content: flex-start;
-  background: linear-gradient(#00000012, #000000a1);
+  background: linear-gradient(#00000022, #000000a1);
   padding: 5px 10px;
-`;
-const StyledGridContainer = styled(IonCard)`
-  background: var(--white);
   --ion-font-family: "Slabo 27px";
   font-family: "Slabo 27px";
 `;
+
+const StyledCard = styled(IonCard)`
+  background: var(--white);
+  /* color: var(--white); */
+  .info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+`;
+const StyledGridContainer = styled.div``;
 
 const StyledActionButton = styled(IonButton)`
   position: absolute;
