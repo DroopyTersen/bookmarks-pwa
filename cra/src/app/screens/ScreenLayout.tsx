@@ -39,21 +39,30 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   let cssClass = [CLASS_NAME, className].filter(Boolean).join(" ");
   return (
     <>
-      <IonPage>
+      <StyledPage>
         <AppHeader showBack={showBack} backFallback={backFallback} title={title} />
-        <IonContent fullscreen={true}>
+        <StyledContent fullscreen={true}>
           {/* <SuspenseWithPerf traceId="screen-content" fallback={"Loading..."}> */}
           {children}
           {/* </SuspenseWithPerf> */}
-        </IonContent>
-      </IonPage>
+        </StyledContent>
+      </StyledPage>
     </>
   );
 };
 
 export default ScreenLayout;
 
-const StyledScreenLayout = styled.div``;
-const StyledContent = styled.div`
-  margin-top: 0px;
+export const StyledPage = styled(IonPage)`
+  background: linear-gradient(-13deg, #efc75e 10%, #e2574c 75%);
+  --ion-background-color: transparent;
+  --ion-text-color: var(--white);
+  ion-header.header-md:after {
+    display: none;
+  }
+`;
+const StyledContent = styled(IonContent)`
+  /* background: linear-gradient(0deg, #528ba0, #e2574c); */
+  /* background: linear-gradient(-13deg, #efc75e 10%, #e2574c 90%);
+  --ion-background-color: transparent; */
 `;

@@ -25,7 +25,7 @@ const getBookmarkFromQueryString = (url: string) => {
   let sharedUrl = shareData.url || (checkIsUrl(shareData.description) ? shareData.description : "");
 
   let bookmark: Bookmark = {
-    image: "/images/icons/icon-192x192.png",
+    image: "/images/fallback.png",
     title: "",
     ...shareData,
     url: sharedUrl,

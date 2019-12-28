@@ -11,6 +11,10 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
   console.log("TCL: BookmarksList -> bookmarks", bookmarks, collectionKey);
   let width = "300px";
   let height = "175px";
+
+  if (bookmarks && bookmarks.length === 0) {
+    return <StyledMessage>You haven't added any bookmarks to this collection yet.</StyledMessage>;
+  }
   return (
     <Grid className="bookmarks-list" gap={1} size={width}>
       {bookmarks.map((item) => (
@@ -23,7 +27,11 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
 }
 
 export default React.memo(BookmarksList);
-
+const StyledMessage = styled.p`
+  color: var(--grey-500);
+  font-style: italic;
+  padding: 0 16px;
+`;
 export interface CollectionsListProps {
   //props
   collectionKey?: string;

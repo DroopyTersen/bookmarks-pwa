@@ -14,14 +14,14 @@ export default function BackgroundImage({
 }) {
   let cssClass = [CLASS_NAME, className].filter(Boolean).join(" ");
   let imageStyles = { backgroundImage: `url('${src}')` };
-
+  let LinkElem = to || href ? Link : "span";
   return (
     <StyledImageContainer {...additionalProps} className={cssClass}>
-      <Link to={to} className={className} href={href}>
+      <LinkElem to={to} className={className} href={href}>
         <div className="img" style={imageStyles}>
           {children}
         </div>
-      </Link>
+      </LinkElem>
     </StyledImageContainer>
   );
 }

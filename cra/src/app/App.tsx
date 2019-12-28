@@ -18,6 +18,7 @@ import {
 } from "@ionic/react";
 import CollectionScreen from "./screens/CollectionScreen";
 import BookmarkFormScreen from "./screens/BookmarkFormScreen";
+import CollectionFormScreen from "./screens/CollectionFormScreen";
 
 const App: React.FC = () => {
   return (
@@ -25,13 +26,16 @@ const App: React.FC = () => {
     <FirebaseProvider>
       <IonicApp className="App">
         <Router>
-          <CollectionsScreen path="/" default />
+          <HomeScreen path="/" default />
+          {/* <CollectionsScreen path="/" default /> */}
           <CollectionsScreen path="/collections" />
           <CollectionScreen path="/collections/:slug" />
+          <CollectionFormScreen path="/collections/edit/:id" title="Edit Collection" />
+          <CollectionFormScreen path="/collections/new" title="New Collection" />
           <BookmarkFormScreen path="/share-target" />
           <BookmarkFormScreen path="/new" />
           <BookmarkFormScreen path="/bookmarks/new" />
-          <BookmarkFormScreen path="/bookmarks/edit/:id" />
+          <BookmarkFormScreen path="/bookmarks/edit/:id" title="Edit Bookmark" />
         </Router>
       </IonicApp>
     </FirebaseProvider>

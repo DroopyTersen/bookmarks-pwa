@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { IonHeader, IonToolbar, IonButtons, IonTitle, IonFooter } from "@ionic/react";
+import { IonHeader, IonToolbar, IonButtons, IonTitle, IonFooter, IonThumbnail } from "@ionic/react";
 import BackButton from "navigation/BackButton";
 import { title } from "process";
 
@@ -29,9 +29,11 @@ const AppHeader: React.FC<AppHeaderProps> = ({
       <IonToolbar color="primary">
         <IonButtons slot="start">
           {showBack && <BackButton fallback={backFallback} />}
-          {/* <IonThumbnail>
-          <img src="/images/icons/icon-72x72.png" />
-        </IonThumbnail> */}
+          {!showBack && (
+            <LogoContainer className="centered">
+              <img src="/images/icons/icon-72x72.png" />
+            </LogoContainer>
+          )}
         </IonButtons>
         <CenteredTitle>{title}</CenteredTitle>
       </IonToolbar>
@@ -46,6 +48,17 @@ const StyledAppHeader = styled.div`
   display: inline-block;
 `;
 
+const LogoContainer = styled.div`
+  background: #ffffff26;
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+
+  img {
+    width: 28px;
+    height: 28px;
+  }
+`;
 const CenteredTitle = styled(IonTitle)`
   width: 100%;
   position: absolute;

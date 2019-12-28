@@ -8,7 +8,7 @@ import useCollections from "Collections/useCollections";
 import CollectionPicker from "Collections/CollectionPicker";
 import useNavigation from "navigation/useNavigation";
 
-let fallBackImage = "/images/icons/icon-192x192.png";
+let fallBackImage = "/images/fallback.png";
 export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkFormProps) {
   let { bookmark, status, update, save } = useBookmarkForm(initialBookmark);
   let { navigate } = useNavigation();
@@ -27,7 +27,7 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
           rows={4}
           name="url"
           value={bookmark.url}
-          onIonChange={(event: any) => update("url", event.target.value)}
+          onIonBlur={(event: any) => update("url", event.target.value)}
         ></StyledTextArea>
       </IonItem>
       <StyledPicker>
@@ -93,10 +93,12 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
 export interface BookmarkFormProps {
   bookmark?: Bookmark;
 }
+
 const StyledPicker = styled.div`
   position: relative;
   padding: 15px 16px 5px;
 `;
+
 const StyledTextArea = styled(IonTextarea)`
   font-size: 14px;
   &.title {
@@ -119,10 +121,6 @@ const StyledActions = styled.div`
   }
 `;
 
-const StyledDescription = styled.p`
-  white-space: pre-wrap;
-`;
-
 const StyledContainer = styled.div`
   padding-bottom: 80px;
 
@@ -133,7 +131,7 @@ const StyledContainer = styled.div`
 `;
 
 const StyledImageContainer = styled.div`
-  width: 100%;
+  margin: 16px 16px 0 16px;
   img {
     max-width: 100%;
   }

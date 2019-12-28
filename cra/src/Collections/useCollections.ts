@@ -10,6 +10,6 @@ export default function useCollections() {
   let data = useFirestoreCollectionData(query);
 
   return {
-    items: orderBy(data, ["title"], ["asc"]) as Collection[],
+    items: orderBy(data, ["sortOrder", "title"], ["asc", "asc"]) as Collection[],
   };
 }

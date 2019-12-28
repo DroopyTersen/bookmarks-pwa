@@ -1,4 +1,4 @@
-import { FirebaseItem, saveDbItem, getDbItemsByUser } from "fire/firestore.utils";
+import { FirebaseItem, saveDbItem, getDbItemsByUser, getDbItem } from "fire/firestore.utils";
 import { FirebaseUser } from "fire/firebase";
 import kebabCase from "lodash/kebabCase";
 
@@ -6,6 +6,8 @@ export interface Collection extends FirebaseItem {
   title: string;
   image?: string;
   slug?: string;
+  sortOrder?: number;
+  permissions?: "public" | "private";
 }
 
 export class CollectionsApi {
@@ -26,12 +28,18 @@ export class CollectionsApi {
     let all = await this.getAll();
     return all.find((c) => c.title === title);
   };
+  getByKey = async (key: string) => {
+    return getDbItem(this.db, "collections", key);
+  };
   save = async (item: Collection): Promise<Collection> => {
     if (!item.title) {
       throw new Error("collections.save: You must specify a Collection title");
     }
     if (!item.slug) {
       item.slug = kebabCase(item.title);
+    }
+    if (typeof item.sortOrder === "string") {
+      item.sortOrder = parseInt(item.sortOrder || "99", 10);
     }
 
     let existing = await this.getByTitle(item.title);
