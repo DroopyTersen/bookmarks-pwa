@@ -101,8 +101,8 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
         <StyledSaveButton
           size="large"
           expand="block"
-          color="secondary"
-          // fill="outline"
+          color="light"
+          fill="outline"
           disabled={status !== BookmarkStatus.Valid}
           onClick={handleSave}
         >

@@ -48,7 +48,7 @@ const MenuWrapper: React.FC = function({ children }) {
   return (
     <MenuContext.Provider value={menu}>
       <Sidebar
-        touchHandleWidth={12}
+        // touchHandleWidth={12}
         onSetOpen={menu.setIsOpen}
         open={menu.isOpen}
         sidebarClassName="bookmarker-menu-sidebar"
