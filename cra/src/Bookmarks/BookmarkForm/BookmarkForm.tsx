@@ -41,6 +41,14 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
             onIonBlur={(event: any) => update("url", event.target.value)}
           ></StyledTextArea>
         </StyledFormControl>
+
+        <StyledFormControl>
+          <IonLabel position="fixed">Collection</IonLabel>
+          <CollectionPicker
+            value={bookmark.collectionKey}
+            onChange={(val) => update("collectionKey", val)}
+          />
+        </StyledFormControl>
         {/* <StyledPicker>
           <CollectionPicker
             value={bookmark.collectionKey}

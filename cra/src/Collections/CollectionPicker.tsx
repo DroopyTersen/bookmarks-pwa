@@ -1,19 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
 import useCollections from "./useCollections";
 import { PickerSingle } from "components/Picker/Picker";
+import { IonButton, IonActionSheet } from "@ionic/react";
 
 function CollectionPicker({ onChange, value }: CollectionPickerProps) {
-  let { items } = useCollections();
-  let options = (items || []).map((c) => ({ label: c.title, value: c.key }));
+  let { items: collections } = useCollections();
+  let [selectedKey, setSelectedKey] = useState(() => {
+    if (value) return value;
+    if (collections?.length) return collections[0].key;
+  });
+  let [isOpen, setIsOpen] = useState(false);
+  let selected = collections.find((c) => c.key === selectedKey);
   //   console.log("Picker options", options);
   return (
-    <PickerSingle
-      name="collection"
-      value={value || (options.length ? options[0].value : "")}
-      onChange={onChange}
-      options={options}
-      creatable={true}
-    />
+    <>
+      <IonButton size="default" fill="outline" onClick={() => setIsOpen(true)}>
+        {selected.title}
+      </IonButton>
+      <IonActionSheet
+        header="Choose a Collection"
+        isOpen={isOpen}
+        onDidDismiss={() => setIsOpen(false)}
+        buttons={collections.map((collection) => ({
+          text: collection.title,
+          handler: () => {
+            setSelectedKey(collection.key);
+            setIsOpen(false);
+          },
+        }))}
+      />
+    </>
   );
 }
 
