@@ -5,7 +5,7 @@ export function useFirebase() {
   let firestore = useFirestore();
   let user = useUser();
   return {
-    db: firestore(),
+    db: firestore() as firebase.firestore.Firestore,
     currentUser: pick(user, "uid", "displayName", "photoURL", "email") as FirebaseUser,
   };
 }

@@ -2,12 +2,13 @@ import React, { useCallback } from "react";
 import { IonButton, IonIcon, IonBackButton } from "@ionic/react";
 import useNavigation from "./useNavigation";
 import Icon from "components/primitives/Icon";
-function BackButton({ fallback, url = "" }: BackButtonProps) {
+function BackButton({ url = "" }: BackButtonProps) {
   let { goBack, navigate } = useNavigation();
 
   let handleClick = () => {
-    if (url) navigate(url);
-    else goBack(fallback);
+    if (url === "back") {
+      goBack("/");
+    } else navigate(url || "/");
   };
   return (
     <IonButton onClick={handleClick}>
@@ -21,6 +22,5 @@ function BackButton({ fallback, url = "" }: BackButtonProps) {
 export default React.memo(BackButton);
 
 export interface BackButtonProps {
-  fallback: string;
-  url?: string;
+  url: string;
 }

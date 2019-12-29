@@ -12,9 +12,6 @@ import {
   IonFooter,
   IonButton,
 } from "@ionic/react";
-import CollectionsList from "Collections/CollectionsList";
-import { SuspenseWithPerf } from "reactfire";
-import BackButton from "navigation/BackButton";
 import AppHeader from "app/AppHeader";
 import Icon from "components/primitives/Icon";
 import useNavigation from "navigation/useNavigation";
@@ -26,9 +23,7 @@ export interface ScreenLayoutProps {
   // props
   title?: string;
   className?: string;
-  showBack?: Boolean;
-  backFallback?: string;
-
+  backUrl?: string;
   [key: string]: any;
 }
 
@@ -36,9 +31,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   children,
   className = "",
   title = "Boomarker",
-  showBack = true,
   backUrl = "",
-  backFallback = "/",
   hideHeader = false,
   ...rest
 }) => {
@@ -49,9 +42,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
     <>
       <MenuWrapper>
         <StyledPage>
-          {!hideHeader && (
-            <AppHeader showBack={showBack} backFallback={backFallback} backUrl="" title={title} />
-          )}
+          {!hideHeader && <AppHeader backUrl={backUrl} title={title} />}
           <StyledContent fullscreen={true}>
             {/* <SuspenseWithPerf traceId="screen-content" fallback={"Loading..."}> */}
             {children}
@@ -88,6 +79,9 @@ export default ScreenLayout;
 const StyledFooter = styled(IonFooter)`
   z-index: 2;
   background: var(--accent-500);
+  color: var(--accent-500);
+  --ion-toolbar-background: var(--accent-500);
+  --ion-toolbar-color: var(--primary-500);
 `;
 export const StyledPage = styled(IonPage)`
   background: linear-gradient(-13deg, #efc75e 10%, #e2574c 75%);
@@ -101,7 +95,7 @@ export const StyledPage = styled(IonPage)`
 export const StyledContent = styled(IonContent)`
   /* padding-bottom: 60px; */
   --offset-bottom: 100px;
-  --padding-bottom: 100px;
+  --padding-bottom: 50px;
   /* background: linear-gradient(0deg, #528ba0, #e2574c); */
   /* background: linear-gradient(-13deg, #efc75e 10%, #e2574c 90%);
   --ion-background-color: transparent; */

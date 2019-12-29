@@ -11,7 +11,7 @@ function CollectionScreen({ slug = "", ...rest }) {
   let collection = items.find((c) => c.slug === slug);
   if (!collection) return null;
   return (
-    <ScreenLayout title={collection.title} backFallback={"/collections"}>
+    <ScreenLayout title={collection.title} backUrl={"/collections"}>
       <BookmarksList collectionKey={collection.key} />
       {/* <NewBookmarkFab collection={collection.key} /> */}
     </ScreenLayout>

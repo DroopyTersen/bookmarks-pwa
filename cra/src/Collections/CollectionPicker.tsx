@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useCollections from "./useCollections";
 import { PickerSingle } from "components/Picker/Picker";
 import { IonButton, IonActionSheet } from "@ionic/react";
@@ -11,6 +11,10 @@ function CollectionPicker({ onChange, value }: CollectionPickerProps) {
   });
   let [isOpen, setIsOpen] = useState(false);
   let selected = collections.find((c) => c.key === selectedKey);
+
+  useEffect(() => {
+    onChange(selectedKey);
+  }, [selectedKey]);
   //   console.log("Picker options", options);
   return (
     <>

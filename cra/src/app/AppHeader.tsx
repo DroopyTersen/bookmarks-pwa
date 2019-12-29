@@ -9,8 +9,8 @@ const CLASS_NAME = "app-header";
 export interface AppHeaderProps {
   // props
   title: string;
-  showBack: Boolean;
-  backFallback: string;
+  // showBack: Boolean;
+  // backFallback: string;
   backUrl?: string;
   className?: string;
   [key: string]: any;
@@ -19,8 +19,8 @@ export interface AppHeaderProps {
 const AppHeader: React.FC<AppHeaderProps> = ({
   children,
   className = "",
-  showBack = true,
-  backFallback = "/",
+  // showBack = true,
+  // backFallback = "/",
   backUrl = "",
   title = "Bookmarker",
   ...rest
@@ -29,14 +29,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
   return (
     <IonHeader>
       <IonToolbar color="primary">
-        <IonButtons slot="start">
-          {showBack && <BackButton fallback={backFallback} url={backUrl} />}
-          {!showBack && (
-            <LogoContainer className="centered">
-              <img src="/images/icons/icon-72x72.png" />
-            </LogoContainer>
-          )}
-        </IonButtons>
+        <IonButtons slot="start">{backUrl && <BackButton url={backUrl} />}</IonButtons>
         <CenteredTitle>{title}</CenteredTitle>
       </IonToolbar>
     </IonHeader>

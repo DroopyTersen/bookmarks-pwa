@@ -3,7 +3,7 @@ import React from "react";
 import { byCreatedBy } from "fire/firestore.utils";
 import orderBy from "lodash/orderBy";
 import { useFirebase } from "fire/useFirebase";
-import { useFirestoreCollectionData } from "reactfire";
+import { useFirestoreCollectionData, useFirestoreDocData } from "reactfire";
 import BookmarksApi, { Bookmark } from "./BookmarksApi";
 export default function useBookmarks({ collection = "" }) {
   let { db, currentUser } = useFirebase();
@@ -19,3 +19,10 @@ export default function useBookmarks({ collection = "" }) {
     remove: api.remove,
   };
 }
+
+// export function useBookmark(id:string) {
+//   export default function useBookmarks({ collection = "" }) {
+//     let { db, currentUser } = useFirebase();
+//     let ref = db.collection("bookmarks").doc(id);
+//     useFirestoreDocData(ref)
+// })

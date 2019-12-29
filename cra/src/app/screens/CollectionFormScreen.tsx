@@ -9,7 +9,7 @@ import styled from "styled-components";
 
 export default function CollectionFormScreen({ title = "New Collection", id = "", ...rest }) {
   return (
-    <ScreenLayout title={title}>
+    <ScreenLayout title={title} backUrl="back">
       <CollectionForm id={id} />
     </ScreenLayout>
   );

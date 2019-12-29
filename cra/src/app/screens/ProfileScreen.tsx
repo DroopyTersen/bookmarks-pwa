@@ -9,7 +9,7 @@ import UserDetails from "auth/UserDetails";
 function ProfileScreen({ ...rest }) {
   let user: firebase.User = useUser();
   return (
-    <ScreenLayout title="Profile">
+    <ScreenLayout title="Profile" backUrl="/">
       <UserDetails user={user} />
     </ScreenLayout>
   );
