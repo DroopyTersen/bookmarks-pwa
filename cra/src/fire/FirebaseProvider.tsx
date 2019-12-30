@@ -12,7 +12,7 @@ import {
   preloadDatabase,
   preloadStorage,
 } from "reactfire";
-import LoginScreen from "app/screens/LoginScreen";
+import LoginScreen from "screens/LoginScreen";
 
 // Our components will lazy load the
 // SDKs to decrease their bundle size.

@@ -4,6 +4,7 @@ import useCollections from "Collections/useCollections";
 import useNavigation from "./useNavigation";
 import { useUser } from "reactfire";
 import { IonThumbnail, IonButton, IonItem, IonAvatar } from "@ionic/react";
+import Link from "./Link";
 
 export default function MenuContent() {
   let { items: collections } = useCollections();
@@ -11,12 +12,14 @@ export default function MenuContent() {
   let user: firebase.User = useUser();
   return (
     <StyledMenu>
-      <div className="menu-header">
-        <IonThumbnail>
-          <img src="/images/icons/icon-512x512.png" />
-        </IonThumbnail>
-        <h1 className="title">Bookmarker</h1>
-      </div>
+      <Link to="/" className="menu-link">
+        <div className="menu-header">
+          <IonThumbnail>
+            <img src="/images/icons/icon-512x512.png" />
+          </IonThumbnail>
+          <h1 className="title">Bookmarker</h1>
+        </div>
+      </Link>
       <div className="section">
         <h2 className="title">Collections</h2>
         {collections.map((collection) => (
@@ -47,14 +50,16 @@ export default function MenuContent() {
 const MenuItem = function({ path, children, thumbnail = "" }) {
   let { navigate } = useNavigation();
   return (
-    <IonItem onClick={() => navigate(path)}>
-      {thumbnail && (
-        <StyledThumbnail slot="end">
-          <img src={thumbnail} />
-        </StyledThumbnail>
-      )}
-      {children}
-    </IonItem>
+    <Link to={path} className="menu-link">
+      <IonItem>
+        {thumbnail && (
+          <StyledThumbnail slot="end">
+            <img src={thumbnail} />
+          </StyledThumbnail>
+        )}
+        {children}
+      </IonItem>
+    </Link>
   );
 };
 
@@ -78,6 +83,7 @@ const StyledMenu = styled.div`
     align-items: center;
     position: relative;
     left: -5px;
+    color: var(--white);
     .title {
       font-family: "Slabo 27px";
       font-size: 32px;
@@ -92,6 +98,9 @@ const StyledMenu = styled.div`
       font-size: 18px;
       color: var(--accent-100);
     }
+  }
+  .menu-link {
+    text-decoration: none;
   }
   /* color: black; */
   /* background: linear-gradient(-13deg, #2c728c 10%, #528ba0 75%); */
