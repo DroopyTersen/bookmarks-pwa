@@ -29,7 +29,7 @@ export default function BookmarkFormScreen({ title = "New Bookmark", id = "", ..
         setInitial(getBookmarkFromQueryString(window.location.href));
       }
     } catch (err) {
-      setInitial({ image: "/images/fallback.png", title: "" });
+      setInitial({ image: "/images/bookmark.png", title: "" });
     }
     return () => (isMounted = false);
   }, [id]);
@@ -60,7 +60,7 @@ const getInitialBookmark = async function(id, api: CollectionsApi) {
       return getBookmarkFromQueryString(window.location.href);
     }
   } catch (err) {
-    return { image: "/images/fallback.png", title: "" };
+    return { image: "/images/bookmark.png", title: "" };
   }
 };
 const getBookmarkFromQueryString = (url: string) => {
@@ -70,7 +70,7 @@ const getBookmarkFromQueryString = (url: string) => {
 
   let bookmark: Bookmark = {
     collectionKey: parsedUrl.searchParams.get("collection"),
-    image: "/images/fallback.png",
+    image: "/images/bookmark.png",
     title: "",
     ...shareData,
     url: sharedUrl,

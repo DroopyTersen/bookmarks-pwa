@@ -5,6 +5,14 @@ import styled from "styled-components";
 import { IonTextarea, IonItem, IonLabel, IonButton, IonCard } from "@ionic/react";
 import BackgroundImage from "components/BackgroundImage/BackgroundImage";
 import { useFooterCommands } from "app/Footer";
+import {
+  Form,
+  FormControl,
+  BigButton,
+  TextArea,
+  Input,
+  ImagePreview,
+} from "components/primitives/Forms";
 
 function CollectionForm({ id = "" }: CollectionFormProps) {
   let { item, save, update, status } = useCollectionForm(id);
@@ -34,62 +42,49 @@ function CollectionForm({ id = "" }: CollectionFormProps) {
   }
 
   return (
-    <StyledContainer>
-      <StyledForm>
-        <IonItem>
-          <IonLabel position="floating">Title</IonLabel>
-          <StyledTextArea
-            className="title"
-            name="title"
-            placeholder="Collection title..."
-            required={true}
-            value={item.title}
-            onIonChange={(event: any) => update("title", event.target.value)}
-          ></StyledTextArea>
-        </IonItem>
+    <Form>
+      <FormControl>
+        <IonLabel position="floating">Title</IonLabel>
+        <TextArea
+          className="title"
+          name="title"
+          placeholder="Collection title..."
+          required={true}
+          value={item.title}
+          onIonChange={(event: any) => update("title", event.target.value)}
+        ></TextArea>
+      </FormControl>
 
-        <IonItem>
-          <IonLabel position="floating">Sort Order</IonLabel>
-          <StyledTextArea
-            className="sort-order"
-            name="sortOrder"
-            type="number"
-            required={true}
-            value={item.sortOrder ?? 99}
-            onIonChange={(event: any) => update("sortOrder", event.target.value)}
-          ></StyledTextArea>
-        </IonItem>
+      <FormControl>
+        <IonLabel position="fixed">Sort Order</IonLabel>
+        <Input
+          className="sort-order"
+          name="sortOrder"
+          type="number"
+          required={true}
+          value={item.sortOrder ?? 99}
+          onIonChange={(event: any) => update("sortOrder", event.target.value)}
+        ></Input>
+      </FormControl>
 
-        <BackgroundImage src={item.image} style={{ height: "300px" }} />
-        <IonItem>
-          <IonLabel position="floating">Image</IonLabel>
-          <StyledTextArea
-            className="monospace"
-            placeholder="Image url..."
-            rows={4}
-            name="image"
-            value={item.image}
-            onIonChange={(event: any) => update("image", event.target.value)}
-          ></StyledTextArea>
-        </IonItem>
-        <IonItem>
-          <IonButton
-            size="default"
-            expand="block"
-            color="primary"
-            fill="outline"
-            style={{ margin: "0 auto" }}
-            disabled={status !== FormStatus.Valid}
-            onClick={handleSave}
-          >
-            Save
-          </IonButton>
-        </IonItem>
-      </StyledForm>
+      <ImagePreview src={item.image} />
 
-      {/* <StyledActions>
-      </StyledActions> */}
-    </StyledContainer>
+      <FormControl>
+        <IonLabel position="floating">Image</IonLabel>
+        <TextArea
+          className="monospace"
+          placeholder="Image url..."
+          rows={4}
+          name="image"
+          value={item.image}
+          onIonChange={(event: any) => update("image", event.target.value)}
+        ></TextArea>
+      </FormControl>
+
+      {/* <BigButton disabled={status !== FormStatus.Valid} onClick={handleSave}>
+        Save
+      </BigButton> */}
+    </Form>
   );
 }
 

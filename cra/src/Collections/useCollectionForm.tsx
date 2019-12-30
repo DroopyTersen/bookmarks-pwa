@@ -119,7 +119,7 @@ const getDefaultState = (collectionKey: string): CollectionFormState => {
   return {
     item: {
       title: "",
-      image: "/images/fallback.png",
+      image: "/images/bookmark.png",
     },
     status: collectionKey ? FormStatus.Loading : FormStatus.Incomplete,
   };
