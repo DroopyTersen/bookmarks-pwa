@@ -1,13 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext, useState, useEffect } from "react";
 import styled from "styled-components";
 import { IonContent, IonPage } from "@ionic/react";
 import AppHeader from "app/AppHeader";
-import useNavigation from "navigation/useNavigation";
 import MenuWrapper from "navigation/MenuWrapper";
-import Footer from "app/Footer";
-import { SuspenseWithPerf } from "reactfire";
-
-const CLASS_NAME = "screen";
+import Footer, { FooterCommand } from "app/Footer";
 
 export interface ScreenLayoutProps {
   // props
@@ -15,25 +11,38 @@ export interface ScreenLayoutProps {
   className?: string;
   backUrl?: string;
   hideHeader?: boolean;
+  footerCommands?: FooterCommand[];
   [key: string]: any;
 }
 
+let FooterCommandsContext = React.createContext({ setCommands: null });
+
+export function useFooterCommands() {
+  return useContext(FooterCommandsContext);
+}
 const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   children,
   className = "",
   title = "Boomarker",
   backUrl = "",
   hideHeader = false,
+  footerCommands = [],
   ...rest
 }) => {
+  let [commands, setCommands] = useState(footerCommands);
+  useEffect(() => {
+    setCommands(footerCommands);
+  }, [footerCommands]);
   return (
     <>
       <MenuWrapper>
-        <StyledPage>
-          {!hideHeader && <AppHeader backUrl={backUrl} title={title} />}
-          <StyledContent fullscreen={true}>{children}</StyledContent>
-          <Footer />
-        </StyledPage>
+        <FooterCommandsContext.Provider value={{ setCommands }}>
+          <StyledPage className="screen">
+            {!hideHeader && <AppHeader backUrl={backUrl} title={title} />}
+            <StyledContent fullscreen={true}>{children}</StyledContent>
+            <Footer commands={commands} />
+          </StyledPage>
+        </FooterCommandsContext.Provider>
       </MenuWrapper>
     </>
   );

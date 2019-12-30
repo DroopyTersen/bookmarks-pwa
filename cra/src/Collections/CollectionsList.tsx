@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useCollections from "./useCollections";
 import Link from "navigation/Link";
 import Grid from "components/Grid/Grid";
@@ -8,12 +8,20 @@ import BackgroundImage, { StyledOverlay } from "components/BackgroundImage/Backg
 import { IonButton, IonActionSheet, IonCard } from "@ionic/react";
 import Icon from "components/primitives/Icon";
 import useNavigation from "navigation/useNavigation";
+import { useFooterCommands } from "screens/ScreenLayout";
 
 function CollectionsList({}: CollectionsListProps) {
   let { items, remove } = useCollections();
+  let { setCommands } = useFooterCommands();
+  console.log("TCL: CollectionsList -> footerContext", setCommands);
+  let { navigate } = useNavigation();
+  useEffect(() => {
+    if (setCommands) {
+      setCommands([{ text: "+ Collection", onClick: () => navigate("/collections/new") }]);
+    }
+  }, [setCommands]);
   let width = "150px";
   let height = width;
-  let { navigate } = useNavigation();
   let [actionSheetKey, setActionSheetKey] = useState("");
 
   return (

@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useMenu } from "navigation/MenuWrapper";
 import useNavigation from "navigation/useNavigation";
 import Icon from "components/primitives/Icon";
 import { IonToolbar, IonButtons, IonButton, IonFooter } from "@ionic/react";
 import styled from "styled-components";
 
-export default function Footer() {
+export interface FooterCommand {
+  text: string;
+  onClick: () => void;
+}
+export default function Footer({ commands }: { commands: FooterCommand[] }) {
   let menu = useMenu();
-  let { navigate } = useNavigation();
 
   return (
     <StyledFooter>
@@ -17,8 +20,12 @@ export default function Footer() {
             <Icon name="menu"></Icon>
           </IonButton>
         </IonButtons>
-        <IonButtons slot="end" onClick={() => navigate("/new")}>
-          <IonButton fill="outline">+ New</IonButton>
+        <IonButtons slot="end">
+          {commands.map((command) => (
+            <IonButton fill="outline" onClick={command.onClick}>
+              {command.text}
+            </IonButton>
+          ))}
         </IonButtons>
       </IonToolbar>
     </StyledFooter>
