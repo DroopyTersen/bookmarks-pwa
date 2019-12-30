@@ -26,7 +26,7 @@ let reducer = function(state: SaveBookmarkState, action: any): SaveBookmarkState
       return {
         ...state,
         bookmark: state.bookmark,
-        status: validateBookmark(bookmark) ? BookmarkStatus.Valid : BookmarkStatus.Incomplete,
+        status: validateBookmark(state.bookmark) ? BookmarkStatus.Valid : BookmarkStatus.Incomplete,
       };
     case "update-bookmark":
       bookmark = {
@@ -77,7 +77,7 @@ export default function useSaveBookmark(initialBookmark: Bookmark) {
           dispatch({ type: "link-preview-result", linkPreview });
         }
       } catch (err) {
-        console.log("Link Preivew Error", err);
+        console.log("Link Previww Error", err);
         dispatch({ type: "link-preview-error" });
       }
     };
