@@ -1,13 +1,30 @@
-import React from "react";
+import React, { useEffect } from "react";
 import useCollectionForm, { FormStatus } from "./useCollectionForm";
 import useNavigation from "navigation/useNavigation";
 import styled from "styled-components";
 import { IonTextarea, IonItem, IonLabel, IonButton, IonCard } from "@ionic/react";
 import BackgroundImage from "components/BackgroundImage/BackgroundImage";
+import { useFooterCommands } from "app/Footer";
 
 function CollectionForm({ id = "" }: CollectionFormProps) {
   let { item, save, update, status } = useCollectionForm(id);
   let { navigate } = useNavigation();
+  let footerCommands = useFooterCommands();
+
+  let handleSave = async function() {
+    let savedItem = await save();
+    if (savedItem && savedItem.slug) {
+      navigate("/collections");
+    }
+  };
+  useEffect(() => {
+    let command = {
+      text: "Save",
+      onClick: handleSave,
+      disabled: status !== FormStatus.Valid,
+    };
+    footerCommands.set([command]);
+  });
 
   if (status === FormStatus.Loading) {
     return <div>Loading...</div>;
@@ -15,12 +32,6 @@ function CollectionForm({ id = "" }: CollectionFormProps) {
   if (status === FormStatus.Error) {
     return <h1>ERROR!</h1>;
   }
-  let handleSave = async function() {
-    let savedItem = await save();
-    if (savedItem && savedItem.slug) {
-      navigate("/collections");
-    }
-  };
 
   return (
     <StyledContainer>

@@ -123,6 +123,10 @@ body {
   --ion-background-color: transparent;
   --ion-text-color: var(--white);
 }
+ion-action-sheet {
+  --ion-background-color: var(--white);
+  /* --ion-text-color: var(--black); */
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
