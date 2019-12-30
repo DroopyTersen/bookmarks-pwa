@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useMemo, useEffect } from "react";
 import { useMenu } from "navigation/MenuWrapper";
 import useNavigation from "navigation/useNavigation";
 import Icon from "components/primitives/Icon";
@@ -7,11 +7,64 @@ import styled from "styled-components";
 
 export interface FooterCommand {
   text: string;
-  onClick: () => void;
+  props?: { [key: string]: any };
 }
-export default function Footer({ commands }: { commands: FooterCommand[] }) {
-  let menu = useMenu();
+export interface FooterCommands {
+  commands: FooterCommand[];
+  controls: FooterCommandControls;
+}
 
+export interface FooterCommandControls {
+  set: (commands: FooterCommand[]) => void;
+  push: (command: FooterCommand) => void;
+}
+
+export let FooterCommandsContext = React.createContext<FooterCommand[]>([]);
+export let FooterCommandsControllerContext = React.createContext<FooterCommandControls>(null);
+
+export function FooterProvider({ children }) {
+  let { commands, controls } = useFooterState();
+
+  return (
+    <FooterCommandsContext.Provider value={commands}>
+      <FooterCommandsControllerContext.Provider value={controls}>
+        {children}
+      </FooterCommandsControllerContext.Provider>
+    </FooterCommandsContext.Provider>
+  );
+}
+export function useFooter() {
+  return useContext(FooterCommandsContext);
+}
+
+export function useFooterCommands(commands = []) {
+  let footerCommands = useContext(FooterCommandsControllerContext);
+  useEffect(() => {
+    footerCommands.set(commands);
+  }, []);
+
+  return footerCommands;
+}
+
+export function useFooterState() {
+  let [commands, setCommands] = useState<FooterCommand[]>([]);
+
+  let controls = useMemo(() => {
+    return {
+      set: (commands: FooterCommand[]) => setCommands(commands),
+      push: (newCommand: FooterCommand) =>
+        setCommands((prevCommands: FooterCommand[]) => {
+          return [...prevCommands, newCommand];
+        }),
+    } as FooterCommandControls;
+  }, [setCommands]);
+
+  return { commands, controls };
+}
+
+export default function Footer({}) {
+  let menu = useMenu();
+  let commands = useFooter();
   return (
     <StyledFooter>
       <IonToolbar>
@@ -21,9 +74,9 @@ export default function Footer({ commands }: { commands: FooterCommand[] }) {
           </IonButton>
         </IonButtons>
         <IonButtons slot="end">
-          {commands.map((command) => (
-            <IonButton fill="outline" onClick={command.onClick}>
-              {command.text}
+          {commands.map(({ text, ...props }) => (
+            <IonButton fill="outline" {...props} key={text}>
+              {text}
             </IonButton>
           ))}
         </IonButtons>

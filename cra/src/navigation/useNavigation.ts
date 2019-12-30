@@ -4,6 +4,7 @@ let _stack = [window.location.pathname || "/"];
 
 let navigate = (path: string) => {
   _stack.push(path);
+
   reachNavigate(path);
 };
 

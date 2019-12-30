@@ -8,18 +8,11 @@ import BackgroundImage, { StyledOverlay } from "components/BackgroundImage/Backg
 import { IonButton, IonActionSheet, IonCard } from "@ionic/react";
 import Icon from "components/primitives/Icon";
 import useNavigation from "navigation/useNavigation";
-import { useFooterCommands } from "screens/ScreenLayout";
+import { useFooter, useFooterCommands } from "app/Footer";
 
 function CollectionsList({}: CollectionsListProps) {
   let { items, remove } = useCollections();
-  let { setCommands } = useFooterCommands();
-  console.log("TCL: CollectionsList -> footerContext", setCommands);
   let { navigate } = useNavigation();
-  useEffect(() => {
-    if (setCommands) {
-      setCommands([{ text: "+ Collection", onClick: () => navigate("/collections/new") }]);
-    }
-  }, [setCommands]);
   let width = "150px";
   let height = width;
   let [actionSheetKey, setActionSheetKey] = useState("");

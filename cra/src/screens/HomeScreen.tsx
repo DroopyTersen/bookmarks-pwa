@@ -1,5 +1,5 @@
 import React from "react";
-import ScreenLayout, { StyledPage, StyledContent } from "./ScreenLayout";
+import ScreenLayout from "./ScreenLayout";
 import CollectionsList from "Collections/CollectionsList";
 import { IonCard, IonFooter, IonToolbar, IonButtons, IonButton } from "@ionic/react";
 

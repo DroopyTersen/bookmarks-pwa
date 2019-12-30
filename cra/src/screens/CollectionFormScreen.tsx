@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import ScreenLayout from "./ScreenLayout";
 import useLocation from "hooks/useLocation";
 import BookmarkForm from "Bookmarks/BookmarkForm/BookmarkForm";

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import useBookmarkForm, { BookmarkStatus } from "./useBookmarkForm";
 import { Bookmark } from "Bookmarks/BookmarksApi";
@@ -15,15 +15,28 @@ import {
 import useCollections from "Collections/useCollections";
 import CollectionPicker from "Collections/CollectionPicker";
 import useNavigation from "navigation/useNavigation";
+import { useFooterCommands } from "app/Footer";
+import { FormStatus } from "Collections/useCollectionForm";
 
 let fallBackImage = "/images/fallback.png";
 export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkFormProps) {
   let { bookmark, status, update, save } = useBookmarkForm(initialBookmark);
   let { navigate } = useNavigation();
+  let footerControls = useFooterCommands();
   let handleSave = async function() {
+    console.log("Saving");
     await save();
     navigate("/collections");
   };
+
+  useEffect(() => {
+    let command = {
+      text: "Save",
+      onClick: handleSave,
+      disabled: status !== BookmarkStatus.Valid,
+    };
+    footerControls.set([command]);
+  });
 
   return (
     <StyledContainer>

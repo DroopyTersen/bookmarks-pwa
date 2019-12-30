@@ -1,5 +1,5 @@
 import React from "react";
-import ScreenLayout, { StyledPage, StyledContent } from "./ScreenLayout";
+import ScreenLayout from "./ScreenLayout";
 import styled from "styled-components";
 import Splash from "components/Splash/Splash";
 import LoginForm from "auth/LoginForm";

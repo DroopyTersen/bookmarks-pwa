@@ -1,5 +1,5 @@
 import React from "react";
-import ScreenLayout, { StyledPage, StyledContent } from "./ScreenLayout";
+import ScreenLayout from "./ScreenLayout";
 import styled from "styled-components";
 import Splash from "components/Splash/Splash";
 import LoginForm from "auth/LoginForm";
@@ -13,12 +13,10 @@ function LoginScreen({ ...rest }) {
     navigate("/");
   }
   return (
-    <StyledPage>
-      <StyledContent>
-        <Splash title="Bookmarker" subtitle="Welcome to" />
-        <LoginForm />
-      </StyledContent>
-    </StyledPage>
+    <ScreenLayout hideHeader={true}>
+      <Splash title="Bookmarker" subtitle="Welcome to" />
+      <LoginForm />
+    </ScreenLayout>
   );
 }
 
