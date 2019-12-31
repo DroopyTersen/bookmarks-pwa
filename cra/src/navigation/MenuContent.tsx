@@ -23,7 +23,11 @@ export default function MenuContent() {
       <div className="section">
         <h2 className="title">Collections</h2>
         {collections.map((collection) => (
-          <MenuItem path={`/collections/${collection.slug}`} thumbnail={collection.image}>
+          <MenuItem
+            key={collection.key}
+            path={`/collections/${collection.slug}`}
+            thumbnail={collection.image}
+          >
             {collection.title}
           </MenuItem>
         ))}
