@@ -13,7 +13,7 @@ function LoginScreen({ ...rest }) {
     navigate("/");
   }
   return (
-    <ScreenLayout hideHeader={true}>
+    <ScreenLayout hideHeader={true} hideFooter={true}>
       <Splash title="Bookmarker" subtitle="Welcome to" />
       <LoginForm />
     </ScreenLayout>

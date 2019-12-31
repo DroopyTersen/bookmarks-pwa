@@ -11,6 +11,7 @@ export interface ScreenLayoutProps {
   className?: string;
   backUrl?: string;
   hideHeader?: boolean;
+  hideFooter?: boolean;
   [key: string]: any;
 }
 
@@ -20,6 +21,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
   title = "Boomarker",
   backUrl = "",
   hideHeader = false,
+  hideFooter = false,
   ...rest
 }) => {
   useFooterCommands([]);
@@ -29,7 +31,7 @@ const ScreenLayout: React.FC<ScreenLayoutProps> = ({
         {!hideHeader && <AppHeader backUrl={backUrl} title={title} />}
         <StyledContent fullscreen={true}>{children}</StyledContent>
         <div id="footer-portal"></div>
-        <Footer />
+        {!hideFooter && <Footer />}
       </StyledPage>
     </>
   );

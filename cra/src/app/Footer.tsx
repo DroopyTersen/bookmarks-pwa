@@ -40,7 +40,9 @@ export function useFooter() {
 export function useFooterCommands(commands = []) {
   let footerCommands = useContext(FooterCommandsControllerContext);
   useEffect(() => {
-    footerCommands.set(commands);
+    if (footerCommands) {
+      footerCommands.set(commands);
+    }
   }, []);
 
   return footerCommands;
