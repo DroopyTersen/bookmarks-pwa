@@ -46,7 +46,7 @@ export class CollectionsApi {
       throw new Error("collections.save: You must specify a Collection title");
     }
     if (!item.slug) {
-      item.slug = kebabCase(item.title);
+      item.slug = kebabCase(item.title.toLowerCase());
     }
     if (typeof item.sortOrder === "string") {
       item.sortOrder = parseInt(item.sortOrder || "99", 10);

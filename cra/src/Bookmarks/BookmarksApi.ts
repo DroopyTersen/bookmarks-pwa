@@ -34,7 +34,7 @@ export default class BookmarksApi {
   };
 
   makeSlug = (item: Bookmark) => {
-    return kebabCase(item.title.slice(0, 60));
+    return kebabCase(item.title.slice(0, 60).toLowerCase());
   };
   getAll = async (): Promise<Bookmark[]> => {
     let items = await getDbItemsByUser(this.db, COLLECTION_NAME, this.user);

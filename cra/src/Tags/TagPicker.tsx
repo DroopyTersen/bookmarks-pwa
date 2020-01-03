@@ -18,33 +18,29 @@ import {
 import { Input, FormControl } from "components/primitives/Forms";
 import styled from "styled-components";
 import useTags from "./useTags";
+import { add } from "ionicons/icons";
 
 function TagPicker({ value: tags = [], onChange }: TagPickerProps) {
   let [isModalOpen, setIsModalOpen] = useState(false);
-  const handleInputChange = (e) => {
-    let val = e.target.value || "";
-    onChange(
-      val
-        .split(" ")
-        .filter(Boolean)
-        .map((val) => kebabCase(val))
-    );
-  };
+
   const handleRemove = function(tag: string) {
     onChange(tags.filter((t) => t !== tag).filter(Boolean));
   };
   return (
     <StyledContainer>
       <StyledTags>
-        {tags.filter(Boolean).map((tag) => (
-          <IonChip key={tag} color="light" onClick={() => handleRemove(tag)}>
-            <IonLabel>{tag}</IonLabel>
-            <IonIcon name="close-circle" />
-          </IonChip>
-        ))}
-        <IonChip color="light" outline onClick={() => setIsModalOpen(true)}>
+        {tags
+          .sort()
+          .filter(Boolean)
+          .map((tag) => (
+            <IonChip key={tag} color="light" onClick={() => handleRemove(tag)}>
+              <IonLabel>{tag}</IonLabel>
+              <IonIcon name="close-circle" />
+            </IonChip>
+          ))}
+        <IonChip color="white" outline onClick={() => setIsModalOpen(true)}>
           <IonLabel>Add</IonLabel>
-          <IonIcon name="add" />
+          <IonIcon icon={add.md}></IonIcon>
         </IonChip>
       </StyledTags>
       <TagModal
@@ -91,14 +87,14 @@ function TagModal({ selected = [], onChange, isOpen = false, dismiss }: TagModal
   let [input, setInput] = useState("");
   const toggleTag = function(tag: string) {
     let newTags = selected.includes(tag) ? selected.filter((t) => t !== tag) : [...selected, tag];
-    onChange(newTags);
+    onChange(newTags.sort());
   };
-  let isValidTag = input && !tags.find((t) => t === input.toLowerCase());
+  let isValidTag = input && !tags.find((t) => t === tagify(input));
 
   const submitTag = (e) => {
     e.preventDefault();
     if (isValidTag) {
-      onChange([...selected, input]);
+      onChange([...selected, tagify(input)].sort());
       setInput("");
     }
   };
@@ -120,7 +116,8 @@ function TagModal({ selected = [], onChange, isOpen = false, dismiss }: TagModal
             <Input value={input} onIonChange={(e) => setInput(e.target.value || "")} autofocus />
             <IonButton fill="outline" color="light" disabled={!isValidTag} type="submit">
               <IonLabel>Add</IonLabel>
-              <IonIcon slot="end" name="add"></IonIcon>
+
+              <IonIcon slot="end" icon={add.md}></IonIcon>
             </IonButton>
           </div>
           <StyledTags>
@@ -138,7 +135,7 @@ function TagModal({ selected = [], onChange, isOpen = false, dismiss }: TagModal
         </StyledForm>
         <IonList>
           {tags
-            .filter((t) => t.includes(input.toLowerCase()))
+            .filter((t) => t.includes(tagify(input)))
             .map((tag) => (
               <IonItem key={tag} detail={false} onClick={() => toggleTag(tag)}>
                 <IonLabel>{tag}</IonLabel>
@@ -154,6 +151,8 @@ function TagModal({ selected = [], onChange, isOpen = false, dismiss }: TagModal
     </StyledModal>
   );
 }
+
+const tagify = (tagStr: string = "") => kebabCase(tagStr.toLowerCase());
 
 const StyledForm = styled.form`
   padding: 3px 12px 16px 12px;

@@ -19,9 +19,9 @@ export default function useTagGuesser(bookmark: Bookmark, updateTags: (tags: str
 
 const findTagMatches = function(text: string, tags = []) {
   let regexStr = tags.map((tag) => `(${tag})`).join("|");
-  let regex = new RegExp(regexStr, "gmi");
+  let regex = new RegExp(regexStr, "gi");
   //   console.log(regexStr, kebabCase(text));
-  let matches = (kebabCase(text) + "").match(regex);
+  let matches = (kebabCase(text.toLowerCase()) + "").match(regex);
   console.log("TAG MATCHES", matches);
   return uniq((matches || []).filter(Boolean));
 };

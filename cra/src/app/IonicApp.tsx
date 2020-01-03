@@ -7,6 +7,8 @@ import "@ionic/core/css/ionic.bundle.css";
 import { IonApp } from "@ionic/react";
 // import "ionicons/dist/esm/ion-icon.entry";
 
+import "ionicons";
+
 const CLASS_NAME = "ionic-app";
 
 export interface IonicAppProps {
