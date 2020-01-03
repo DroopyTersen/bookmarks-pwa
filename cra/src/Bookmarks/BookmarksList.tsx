@@ -5,7 +5,15 @@ import styled from "styled-components";
 import { parse as parseUrl } from "url";
 import BackgroundImage, { StyledOverlay } from "components/BackgroundImage/BackgroundImage";
 import useBookmarks from "./useBookmarks";
-import { IonActionSheet, IonButton, IonCard, IonCardContent, IonCardSubtitle } from "@ionic/react";
+import {
+  IonActionSheet,
+  IonButton,
+  IonCard,
+  IonCardContent,
+  IonCardSubtitle,
+  IonChip,
+  IonLabel,
+} from "@ionic/react";
 import useNavigation from "navigation/useNavigation";
 import Icon from "components/primitives/Icon";
 import format from "date-fns/format";
@@ -29,7 +37,7 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
           {bookmarks.map((item) => (
             <StyledCard key={item.key}>
               <BackgroundImage style={{ height }} src={item.image} key={item.key} href={item.url}>
-                <Caption>{item.title}</Caption>
+                <TitleCaption>{item.title}</TitleCaption>
                 <StyledActionButton
                   fill="clear"
                   onClick={(e) => {
@@ -51,6 +59,13 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
                   </div>
                   <IonCardSubtitle>{format(new Date(item.created), "MM/dd/yyyy")}</IonCardSubtitle>
                 </div>
+                <StyledTags className="tags">
+                  {item.tags.map((tag) => (
+                    <IonChip color="secondary">
+                      <IonLabel>{tag}</IonLabel>
+                    </IonChip>
+                  ))}
+                </StyledTags>
                 <p>{item.description}</p>
               </IonCardContent>
             </StyledCard>
@@ -82,8 +97,20 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
     </>
   );
 }
-
-const Caption = styled(StyledOverlay)`
+const StyledTags = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  > * {
+    margin-right: 5px;
+    margin-top: 5px;
+  }
+  ion-chip {
+    font-size: 13px;
+    padding: 0 10px;
+    margin-left: 0;
+  }
+`;
+const TitleCaption = styled(StyledOverlay)`
   display: flex;
   align-items: flex-end;
   text-align: left;
@@ -100,7 +127,10 @@ const StyledCard = styled(IonCard)`
   .info {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 8px;
+    margin-bottom: 5px;
+  }
+  .tags {
+    margin-bottom: 5px;
   }
 `;
 const StyledGridContainer = styled.div``;
