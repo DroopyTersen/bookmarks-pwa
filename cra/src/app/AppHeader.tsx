@@ -55,11 +55,13 @@ const LogoContainer = styled.div`
   }
 `;
 const CenteredTitle = styled(IonTitle)`
-  width: 100%;
-  position: absolute;
-  left: 0;
-  text-align: center;
-  top: 0;
-  bottom: 0;
+  @media only screen and (max-width: 1000px) {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    top: 0;
+    bottom: 0;
+  }
   /* font-family: "Slabo 27px"; */
 `;

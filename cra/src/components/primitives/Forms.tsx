@@ -12,6 +12,7 @@ import {
 
 export const Form = styled.form`
   --ion-color-primary: var(--white);
+  max-width: 600px;
 `;
 
 export const FormControl = styled(IonItem)`
@@ -22,11 +23,17 @@ export const FormControl = styled(IonItem)`
   padding: 3px 0 16px 0px;
 `;
 export const Input = styled(IonInput)`
+  /* --padding-start: 10px;
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+  --padding-end: 8px; */
   font-size: 14px;
   box-sizing: border-box;
-  padding: 10px;
+  padding: 0 10px !important;
   background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  margin-top: 8px;
+  width: 100%;
 `;
 export const TextArea = styled(IonTextarea)`
   font-size: 14px;

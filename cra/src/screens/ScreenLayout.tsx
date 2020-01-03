@@ -51,6 +51,8 @@ export const StyledContent = styled(IonContent)`
   /* padding-bottom: 60px; */
   --offset-bottom: 100px;
   --padding-bottom: 50px;
+  /* max-width: 1000px; */
+
   /* background: linear-gradient(0deg, #528ba0, #e2574c); */
   /* background: linear-gradient(-13deg, #efc75e 10%, #e2574c 90%);
   --ion-background-color: transparent; */

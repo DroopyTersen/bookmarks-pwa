@@ -19,7 +19,6 @@ export function useMenu(): MenuState {
 function useMenuController(): MenuState {
   let [isDocked, setIsDocked] = useState(() => !!mql.matches);
   let [isOpen, setIsOpen] = useState(false);
-
   useEffect(() => {
     const handleMediaQueryChange = () => {
       setIsDocked(!!mql.matches);
@@ -45,6 +44,15 @@ export interface MenuState {
 
 const MenuWrapper: React.FC = function({ children }) {
   let menu = useMenuController();
+  console.log("MENU", menu);
+  useEffect(() => {
+    setTimeout(() => {
+      if (menu.isDocked || menu.isOpen) {
+        menu.setIsOpen(true);
+      }
+    }, 1000);
+  }, []);
+
   return (
     <MenuContext.Provider value={menu}>
       <Sidebar

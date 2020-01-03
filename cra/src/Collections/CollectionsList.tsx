@@ -20,7 +20,7 @@ function CollectionsList({}: CollectionsListProps) {
   return (
     <>
       <StyledGridContainer>
-        <Grid className="collections-list" gap={1} size="150px">
+        <StyledGrid className="collections-list" gap={1} size="150px">
           {items.map((item) => (
             <StyledImage
               style={{ height }}
@@ -42,7 +42,7 @@ function CollectionsList({}: CollectionsListProps) {
               </StyledActionButton>
             </StyledImage>
           ))}
-        </Grid>
+        </StyledGrid>
       </StyledGridContainer>
       <IonButton
         onClick={() => navigate("/collections/new")}
@@ -87,6 +87,15 @@ let StyledImage = styled(BackgroundImage)`
 export interface CollectionsListProps {
   //props
 }
+const StyledGrid = styled.div`
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1px;
+  @media only screen and (min-width: 600px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+`;
 
 const StyledGridContainer = styled(IonCard)`
   background: var(--white);
