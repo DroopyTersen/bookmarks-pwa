@@ -17,7 +17,7 @@ import CollectionPicker from "Collections/CollectionPicker";
 import useNavigation from "navigation/useNavigation";
 import { useFooterCommands } from "app/Footer";
 import { BigButton, FormControl, TextArea, Form, ImagePreview } from "components/primitives/Forms";
-import TagPicker from "Bookmarks/TagPicker";
+import TagPicker from "Tags/TagPicker";
 
 let fallBackImage = "/images/bookmark.png";
 export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkFormProps) {
@@ -42,9 +42,7 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
   return (
     <Form>
       <FormControl>
-        <IonLabel color="light" position="stacked">
-          Url
-        </IonLabel>
+        <IonLabel>Url</IonLabel>
         <TextArea
           className="monospace"
           placeholder="Bookmark url..."
@@ -55,8 +53,8 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
         ></TextArea>
       </FormControl>
 
-      <FormControl>
-        <IonLabel position="fixed">Collection</IonLabel>
+      <FormControl className="horizontal">
+        <IonLabel>Collection</IonLabel>
         <CollectionPicker
           value={bookmark.collectionKey}
           onChange={(val) => update("collectionKey", val)}
@@ -64,12 +62,12 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
       </FormControl>
 
       <FormControl>
-        <IonLabel position="fixed">Tags</IonLabel>
+        <IonLabel>Tags</IonLabel>
         <TagPicker value={bookmark.tags} onChange={(val) => update("tags", val)} />
       </FormControl>
 
       <FormControl>
-        <IonLabel position="floating">Title</IonLabel>
+        <IonLabel>Title</IonLabel>
         <TextArea
           className="title"
           name="title"
@@ -81,7 +79,7 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
       </FormControl>
 
       <FormControl>
-        <IonLabel position="floating">Description</IonLabel>
+        <IonLabel>Description</IonLabel>
         <TextArea
           name="description"
           placeholder="Bookmark description..."
@@ -94,7 +92,7 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
       </FormControl>
       <ImagePreview src={bookmark.image} />
       <FormControl>
-        <IonLabel position="floating">Image</IonLabel>
+        <IonLabel>Image</IonLabel>
         <TextArea
           className="monospace"
           placeholder="Image url..."

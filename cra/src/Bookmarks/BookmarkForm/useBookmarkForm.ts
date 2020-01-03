@@ -3,6 +3,7 @@ import { previewLink } from "linkPreview/linkPreview.api";
 import { useDatabase } from "reactfire";
 import BookmarksApi, { Bookmark } from "Bookmarks/BookmarksApi";
 import { useFirebase } from "fire/useFirebase";
+import useTagGuesser from "Tags/useTagGuesser";
 
 let reducer = function(state: SaveBookmarkState, action: any): SaveBookmarkState {
   var bookmark: Bookmark = null;
@@ -66,7 +67,9 @@ export default function useSaveBookmark(initialBookmark: Bookmark) {
   let [state, dispatch] = useReducer(reducer, getDefaultState(initialBookmark));
   let { db, currentUser } = useFirebase();
   let api = new BookmarksApi(db, currentUser);
-
+  useTagGuesser(state.bookmark, (value: string[]) =>
+    dispatch({ type: "update-bookmark", key: "tags", value })
+  );
   useEffect(() => {
     let isMounted = true;
     let fetchPreview = async () => {

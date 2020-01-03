@@ -44,7 +44,7 @@ function CollectionForm({ id = "" }: CollectionFormProps) {
   return (
     <Form>
       <FormControl>
-        <IonLabel position="floating">Title</IonLabel>
+        <IonLabel>Title</IonLabel>
         <TextArea
           className="title"
           name="title"
@@ -55,8 +55,8 @@ function CollectionForm({ id = "" }: CollectionFormProps) {
         ></TextArea>
       </FormControl>
 
-      <FormControl>
-        <IonLabel position="fixed">Sort Order</IonLabel>
+      <FormControl className="horizontal">
+        <IonLabel>Sort Order</IonLabel>
         <Input
           className="sort-order"
           name="sortOrder"
@@ -70,7 +70,7 @@ function CollectionForm({ id = "" }: CollectionFormProps) {
       <ImagePreview src={item.image} />
 
       <FormControl>
-        <IonLabel position="floating">Image</IonLabel>
+        <IonLabel>Image</IonLabel>
         <TextArea
           className="monospace"
           placeholder="Image url..."

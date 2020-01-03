@@ -15,12 +15,25 @@ export const Form = styled.form`
   max-width: 600px;
 `;
 
-export const FormControl = styled(IonItem)`
+export const FormControl = styled.div`
   /* padding: 10px;
   border-bottom: none;
   border-bottom-color; */
   --ion-border-color: transparent;
-  padding: 3px 0 16px 0px;
+  padding: 3px 12px 16px 12px;
+  display: flex;
+  flex-direction: column;
+  &.horizontal {
+    flex-direction: row;
+    align-items: center;
+    > *:first-child {
+      margin-right: 10px;
+      margin-bottom: 0px;
+    }
+  }
+  > *:first-child {
+    margin-bottom: 5px;
+  }
 `;
 export const Input = styled(IonInput)`
   /* --padding-start: 10px;
@@ -29,7 +42,7 @@ export const Input = styled(IonInput)`
   --padding-end: 8px; */
   font-size: 14px;
   box-sizing: border-box;
-  padding: 0 10px !important;
+  /* padding: 0 10px !important; */
   background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   margin-top: 8px;
@@ -38,16 +51,17 @@ export const Input = styled(IonInput)`
 export const TextArea = styled(IonTextarea)`
   font-size: 14px;
   box-sizing: border-box;
-  padding: 10px;
+  /* padding: 10px; */
   background: rgba(0, 0, 0, 0.1);
   border-radius: 4px;
+  margin-top: 0px;
   /* border: 1px solid rgba(0, 0, 0, 0.11); */
   .item-has-focus & {
     /* background: rgba(0, 0, 0, 0.07); */
     /* border: 1px solid var(--accent-500); */
   }
   &.title {
-    font-size: 18px;
+    font-size: 16px;
   }
 `;
 

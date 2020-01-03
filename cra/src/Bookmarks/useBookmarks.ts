@@ -5,7 +5,7 @@ import orderBy from "lodash/orderBy";
 import { useFirebase } from "fire/useFirebase";
 import { useFirestoreCollectionData, useFirestoreDocData } from "reactfire";
 import BookmarksApi, { Bookmark } from "./BookmarksApi";
-export default function useBookmarks({ collection = "" }) {
+export default function useBookmarks({ collection = "", tag = "" }) {
   let { db, currentUser } = useFirebase();
   let query = byCreatedBy(db, "bookmarks", currentUser);
   let api = new BookmarksApi(db, currentUser);
@@ -13,6 +13,9 @@ export default function useBookmarks({ collection = "" }) {
   // console.log(data, collection);
   if (collection) {
     data = data.filter((b) => b.collectionKey === collection);
+  }
+  if (tag) {
+    data = data.filter((b) => b.tags.includes(tag));
   }
   return {
     bookmarks: data as Bookmark[],

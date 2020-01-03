@@ -18,8 +18,8 @@ import useNavigation from "navigation/useNavigation";
 import Icon from "components/primitives/Icon";
 import format from "date-fns/format";
 
-function BookmarksList({ collectionKey }: CollectionsListProps) {
-  let { bookmarks, remove } = useBookmarks({ collection: collectionKey });
+function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
+  let { bookmarks, remove } = useBookmarks({ collection: collectionKey, tag });
   let [actionSheetKey, setActionSheetKey] = useState("");
   let { navigate } = useNavigation();
 
@@ -28,7 +28,7 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
   let height = "175px";
 
   if (bookmarks && bookmarks.length === 0) {
-    return <StyledMessage>You haven't added any bookmarks to this collection yet.</StyledMessage>;
+    return <StyledMessage>You haven't added any bookmarks here yet.</StyledMessage>;
   }
   return (
     <>
@@ -61,7 +61,7 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
                 </div>
                 <StyledTags className="tags">
                   {item.tags.map((tag) => (
-                    <IonChip color="secondary">
+                    <IonChip key={tag} color="secondary" onClick={() => navigate("/tags/" + tag)}>
                       <IonLabel>{tag}</IonLabel>
                     </IonChip>
                   ))}
@@ -151,4 +151,5 @@ const StyledMessage = styled.p`
 export interface CollectionsListProps {
   //props
   collectionKey?: string;
+  tag?: string;
 }

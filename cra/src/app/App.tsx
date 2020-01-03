@@ -14,6 +14,7 @@ import MenuWrapper from "navigation/MenuWrapper";
 import styled from "styled-components";
 import { IonPage } from "@ionic/react";
 import Footer, { FooterCommandsContext, useFooterState, FooterProvider } from "./Footer";
+import TagScreen from "screens/TagScreen";
 
 const App: React.FC = () => {
   return (
@@ -33,6 +34,7 @@ const App: React.FC = () => {
               <BookmarkFormScreen path="/new" />
               <BookmarkFormScreen path="/bookmarks/new" />
               <BookmarkFormScreen path="/bookmarks/edit/:id" title="Edit Bookmark" />
+              <TagScreen path="/tags/:tag" />
               <LoginScreen path="/login" />
               <ProfileScreen path="/profile" />
               <ProfileScreen path="/sign-out" />
