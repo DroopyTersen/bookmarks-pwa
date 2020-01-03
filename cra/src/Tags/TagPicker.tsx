@@ -20,7 +20,7 @@ import styled from "styled-components";
 import useTags from "./useTags";
 
 function TagPicker({ value: tags = [], onChange }: TagPickerProps) {
-  let [isModalOpen, setIsModalOpen] = useState(true);
+  let [isModalOpen, setIsModalOpen] = useState(false);
   const handleInputChange = (e) => {
     let val = e.target.value || "";
     onChange(
