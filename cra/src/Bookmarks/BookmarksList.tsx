@@ -15,7 +15,7 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
   let [actionSheetKey, setActionSheetKey] = useState("");
   let { navigate } = useNavigation();
 
-  console.log("TCL: BookmarksList -> bookmarks", bookmarks, collectionKey);
+  // console.log("TCL: BookmarksList -> bookmarks", bookmarks, collectionKey);
   let width = "300px";
   let height = "175px";
 
@@ -27,7 +27,7 @@ function BookmarksList({ collectionKey }: CollectionsListProps) {
       <StyledGridContainer>
         <Grid className="bookmarks-list" gap={1} size={width}>
           {bookmarks.map((item) => (
-            <StyledCard>
+            <StyledCard key={item.key}>
               <BackgroundImage style={{ height }} src={item.image} key={item.key} href={item.url}>
                 <Caption>{item.title}</Caption>
                 <StyledActionButton

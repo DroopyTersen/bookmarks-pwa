@@ -10,7 +10,7 @@ export default function useBookmarks({ collection = "" }) {
   let query = byCreatedBy(db, "bookmarks", currentUser);
   let api = new BookmarksApi(db, currentUser);
   let data: Bookmark[] = useFirestoreCollectionData(query);
-  console.log(data, collection);
+  // console.log(data, collection);
   if (collection) {
     data = data.filter((b) => b.collectionKey === collection);
   }
