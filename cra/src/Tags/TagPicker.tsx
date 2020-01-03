@@ -88,6 +88,7 @@ function TagModal({ selected = [], onChange, isOpen = false, dismiss }: TagModal
   const toggleTag = function(tag: string) {
     let newTags = selected.includes(tag) ? selected.filter((t) => t !== tag) : [...selected, tag];
     onChange(newTags.sort());
+    setInput("");
   };
   let isValidTag = input && !tags.find((t) => t === tagify(input));
 

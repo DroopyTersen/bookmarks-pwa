@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { IonHeader, IonToolbar, IonButtons, IonTitle, IonFooter, IonThumbnail } from "@ionic/react";
 import BackButton from "navigation/BackButton";
 import { title } from "process";
+import { SearchBox } from "components/primitives/Forms";
 
 const CLASS_NAME = "app-header";
 
@@ -32,6 +33,7 @@ const AppHeader: React.FC<AppHeaderProps> = ({
         <IonButtons slot="start">{backUrl && <BackButton url={backUrl} />}</IonButtons>
         <CenteredTitle>{title}</CenteredTitle>
       </IonToolbar>
+      <div id="app-header-placeholder"></div>
     </IonHeader>
   );
 };

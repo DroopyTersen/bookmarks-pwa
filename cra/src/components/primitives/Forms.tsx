@@ -8,6 +8,7 @@ import {
   IonButton,
   IonFooter,
   IonCard,
+  IonSearchbar,
 } from "@ionic/react";
 
 export const Form = styled.form`
@@ -33,6 +34,22 @@ export const FormControl = styled.div`
   }
   > *:first-child {
     margin-bottom: 5px;
+  }
+`;
+
+export const SearchBox = styled(IonSearchbar)`
+  --ion-background-color: var(--white);
+  padding-top: 0;
+  input {
+    font-size: 14px;
+    box-sizing: border-box;
+
+    /* padding: 0 10px !important; */
+    /* background: rgba(0, 0, 0, 0.1) !important;
+    color: var(--white) !important; */
+    border-radius: 4px;
+    /* margin-top: 8px; */
+    /* width: 100%; */
   }
 `;
 export const Input = styled(IonInput)`

@@ -4,6 +4,7 @@ import { IonContent, IonPage } from "@ionic/react";
 import AppHeader from "app/AppHeader";
 import MenuWrapper from "navigation/MenuWrapper";
 import Footer, { FooterCommand, useFooterCommands } from "app/Footer";
+import { SearchBox } from "components/primitives/Forms";
 
 export interface ScreenLayoutProps {
   // props

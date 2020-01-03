@@ -17,9 +17,12 @@ import {
 import useNavigation from "navigation/useNavigation";
 import Icon from "components/primitives/Icon";
 import format from "date-fns/format";
+import { SearchBox, Input, FormControl } from "components/primitives/Forms";
+import ReactDOM from "react-dom";
 
 function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
-  let { bookmarks, remove } = useBookmarks({ collection: collectionKey, tag });
+  let [filterText, setFilterText] = useState("");
+  let { bookmarks, remove } = useBookmarks({ collection: collectionKey, tag, text: filterText });
   let [actionSheetKey, setActionSheetKey] = useState("");
   let { navigate } = useNavigation();
 
@@ -27,50 +30,55 @@ function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
   let width = "300px";
   let height = "175px";
 
-  if (bookmarks && bookmarks.length === 0) {
-    return <StyledMessage>You haven't added any bookmarks here yet.</StyledMessage>;
-  }
   return (
     <>
       <StyledGridContainer>
-        <Grid className="bookmarks-list" gap={1} size={width}>
-          {bookmarks.map((item) => (
-            <StyledCard key={item.key}>
-              <BackgroundImage style={{ height }} src={item.image} key={item.key} href={item.url}>
-                <TitleCaption>{item.title}</TitleCaption>
-                <StyledActionButton
-                  fill="clear"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    setActionSheetKey(item.key);
-                    return false;
-                  }}
-                >
-                  <Icon name="more" />
-                </StyledActionButton>
-              </BackgroundImage>
-              <IonCardContent>
-                <div className="info">
-                  <div>
-                    <a href={item.url} className="url monospace">
-                      {parseUrl(item.url).hostname}
-                    </a>
+        {/* <SearchBox value="" debounce={200} showCancelButton={true} placeholder="Search..." /> */}
+        <BookmarkSearchBar value={filterText} onChange={setFilterText} />
+        {bookmarks && bookmarks.length === 0 ? (
+          <StyledMessage>Nothing to see here...</StyledMessage>
+        ) : (
+          <Grid className="bookmarks-list" gap={1} size={width}>
+            {bookmarks.map((item) => (
+              <StyledCard key={item.key}>
+                <BackgroundImage style={{ height }} src={item.image} key={item.key} href={item.url}>
+                  <TitleCaption>{item.title}</TitleCaption>
+                  <StyledActionButton
+                    fill="clear"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setActionSheetKey(item.key);
+                      return false;
+                    }}
+                  >
+                    <Icon name="more" />
+                  </StyledActionButton>
+                </BackgroundImage>
+                <IonCardContent>
+                  <div className="info">
+                    <div>
+                      <a href={item.url} className="url monospace">
+                        {parseUrl(item.url).hostname}
+                      </a>
+                    </div>
+                    <IonCardSubtitle>
+                      {format(new Date(item.created), "MM/dd/yyyy")}
+                    </IonCardSubtitle>
                   </div>
-                  <IonCardSubtitle>{format(new Date(item.created), "MM/dd/yyyy")}</IonCardSubtitle>
-                </div>
-                <StyledTags className="tags">
-                  {item.tags.map((tag) => (
-                    <IonChip key={tag} color="secondary" onClick={() => navigate("/tags/" + tag)}>
-                      <IonLabel>{tag}</IonLabel>
-                    </IonChip>
-                  ))}
-                </StyledTags>
-                <p>{item.description}</p>
-              </IonCardContent>
-            </StyledCard>
-          ))}
-        </Grid>
+                  <StyledTags className="tags">
+                    {item.tags.map((tag) => (
+                      <IonChip key={tag} color="secondary" onClick={() => navigate("/tags/" + tag)}>
+                        <IonLabel>{tag}</IonLabel>
+                      </IonChip>
+                    ))}
+                  </StyledTags>
+                  <p>{item.description}</p>
+                </IonCardContent>
+              </StyledCard>
+            ))}
+          </Grid>
+        )}
       </StyledGridContainer>
       <IonActionSheet
         header={bookmarks.find((b) => b.key === actionSheetKey)?.title}
@@ -97,6 +105,16 @@ function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
     </>
   );
 }
+
+function BookmarkSearchBar({ value = "", onChange }) {
+  console.log("TCL: BookmarkSearchBar -> value", value);
+
+  return ReactDOM.createPortal(
+    <SearchBox value={value} color="light" onIonChange={(e) => onChange(e.target.value)} />,
+    document.getElementById("app-header-placeholder")
+  );
+}
+
 const StyledTags = styled.div`
   display: flex;
   flex-wrap: wrap;
