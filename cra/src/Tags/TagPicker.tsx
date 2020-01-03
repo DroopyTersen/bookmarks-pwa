@@ -18,7 +18,7 @@ import {
 import { Input, FormControl } from "components/primitives/Forms";
 import styled from "styled-components";
 import useTags from "./useTags";
-import { add } from "ionicons/icons";
+import { add, checkbox, squareOutline } from "ionicons/icons";
 
 function TagPicker({ value: tags = [], onChange }: TagPickerProps) {
   let [isModalOpen, setIsModalOpen] = useState(false);
@@ -33,7 +33,7 @@ function TagPicker({ value: tags = [], onChange }: TagPickerProps) {
           .sort()
           .filter(Boolean)
           .map((tag) => (
-            <IonChip key={tag} color="light" onClick={() => handleRemove(tag)}>
+            <IonChip key={tag} color="white" outline onClick={() => handleRemove(tag)}>
               <IonLabel>{tag}</IonLabel>
               <IonIcon name="close-circle" />
             </IonChip>
@@ -142,7 +142,7 @@ function TagModal({ selected = [], onChange, isOpen = false, dismiss }: TagModal
                 <IonIcon
                   color="light"
                   slot="end"
-                  name={selected.includes(tag) ? "checkbox" : "square-outline"}
+                  icon={selected.includes(tag) ? checkbox.md : squareOutline.md}
                 />
               </IonItem>
             ))}
@@ -159,8 +159,8 @@ const StyledForm = styled.form`
   margin-bottom: 10px;
 `;
 const StyledModal = styled(IonModal)`
-  background: linear-gradient(-77deg, var(--secondary-800), var(--secondary-600));
-  background: linear-gradient(-13deg, #efc75e 10%, #e2574c 75%);
+  /* background: linear-gradient(-77deg, var(--secondary-800), var(--secondary-600));
+  background: linear-gradient(-13deg, #efc75e 10%, #e2574c 75%); */
   --ion-background-color: var(--secondary-600);
   .input {
     display: flex;
