@@ -17,6 +17,7 @@ import CollectionPicker from "Collections/CollectionPicker";
 import useNavigation from "navigation/useNavigation";
 import { useFooterCommands } from "app/Footer";
 import { BigButton, FormControl, TextArea, Form, ImagePreview } from "components/primitives/Forms";
+import TagPicker from "Bookmarks/TagPicker";
 
 let fallBackImage = "/images/bookmark.png";
 export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkFormProps) {
@@ -60,6 +61,11 @@ export default function BookmarkForm({ bookmark: initialBookmark }: BookmarkForm
           value={bookmark.collectionKey}
           onChange={(val) => update("collectionKey", val)}
         />
+      </FormControl>
+
+      <FormControl>
+        <IonLabel position="fixed">Tags</IonLabel>
+        <TagPicker value={bookmark.tags} onChange={(val) => update("tags", val)} />
       </FormControl>
 
       <FormControl>
