@@ -8780,6 +8780,10 @@ shallow-clone@^3.0.0:
   dependencies:
     kind-of "^6.0.2"
 
+shave@^2.5.7:
+  version "2.5.7"
+  resolved "https://registry.yarnpkg.com/shave/-/shave-2.5.7.tgz#7d618403f8f89bc12e1eb5e2291ad74624fcdc53"
+
 shebang-command@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/shebang-command/-/shebang-command-1.2.0.tgz#44aac65b695b03398968c39f363fee5deafdf1ea"
