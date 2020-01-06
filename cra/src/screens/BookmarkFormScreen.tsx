@@ -83,7 +83,8 @@ const getSharedDataFromQueryString = function(url: string): ShareTargetData {
   return {
     title: parsedUrl.searchParams.get("title"),
     url: parsedUrl.searchParams.get("url"),
-    description: parsedUrl.searchParams.get("description"),
+    description: "",
+    // description: parsedUrl.searchParams.get("description"),
   };
 };
 
