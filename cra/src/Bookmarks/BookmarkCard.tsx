@@ -44,12 +44,10 @@ function BookmarkCard({ item, setActionSheetKey }: BookmarkCardProps) {
               </IonChip>
             ))}
           </StyledTags>
-          <Shave maxHeight={90}>{item.description}</Shave>
+          <Shave maxHeight={80}>{item.description.slice(0, 320)}</Shave>
           <div className="info">
             <div>
-              <a href={item.url} className="url monospace">
-                {parseUrl(item.url).hostname}
-              </a>
+              <span className="url monospace">{parseUrl(item.url).hostname}</span>
             </div>
             <div className="date">{format(new Date(item.created), "MM/dd/yyyy")}</div>
           </div>

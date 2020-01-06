@@ -1,13 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import useCollections from "Collections/useCollections";
 import useNavigation from "./useNavigation";
 import { useUser } from "reactfire";
 import { IonThumbnail, IonButton, IonItem, IonAvatar } from "@ionic/react";
 import Link from "./Link";
+import { useCollections } from "app/appState";
 
 export default function MenuContent() {
-  let { items: collections } = useCollections();
+  let { collections } = useCollections();
   let { navigate } = useNavigation();
   let user: firebase.User = useUser();
   return (
