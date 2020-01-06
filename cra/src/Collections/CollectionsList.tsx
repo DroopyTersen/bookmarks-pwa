@@ -20,15 +20,10 @@ function CollectionsList({}: CollectionsListProps) {
   return (
     <>
       <StyledGridContainer>
-        <StyledGrid className="collections-list" gap={1} size="150px">
+        <StyledGrid className="collections-list" gap={1}>
           {items.map((item) => (
-            <StyledImage
-              style={{ height }}
-              src={item.image}
-              key={item.key}
-              to={"/collections/" + item.slug}
-            >
-              <StyledOverlay className="centered">{item.title}</StyledOverlay>
+            <StyledImage src={item.image} key={item.key} to={"/collections/" + item.slug}>
+              <StyledOverlay className="centered title">{item.title}</StyledOverlay>
               <StyledActionButton
                 fill="clear"
                 onClick={(e) => {
@@ -83,6 +78,15 @@ export default React.memo(CollectionsList);
 
 let StyledImage = styled(BackgroundImage)`
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.25);
+  height: 150px;
+  @media only screen and (min-width: 1000px) {
+    height: 300px;
+  }
+  @media only screen and (min-width: 1200px) {
+    .title {
+      font-size: 38px;
+    }
+  }
 `;
 export interface CollectionsListProps {
   //props
@@ -92,13 +96,13 @@ const StyledGrid = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 1px;
-  @media only screen and (min-width: 600px) {
+  @media only screen and (min-width: 1000px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
 `;
 
 const StyledGridContainer = styled(IonCard)`
-  background: var(--white);
+  background: var(--accent-300);
   --ion-font-family: "Slabo 27px";
 `;
 

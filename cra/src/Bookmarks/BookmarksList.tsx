@@ -19,15 +19,16 @@ import format from "date-fns/format";
 import { SearchBox, Input, FormControl } from "components/primitives/Forms";
 import ReactDOM from "react-dom";
 import BookmarkCard from "./BookmarkCard";
+import useSize, { Size } from "hooks/useSize";
 
 function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
   let [filterText, setFilterText] = useState("");
   let { bookmarks, remove } = useBookmarks({ collection: collectionKey, tag, text: filterText });
   let [actionSheetKey, setActionSheetKey] = useState("");
   let { navigate } = useNavigation();
-
+  let size = useSize();
   // console.log("TCL: BookmarksList -> bookmarks", bookmarks, collectionKey);
-  let width = "300px";
+  let width = size === Size.large ? "420px" : "300px";
 
   return (
     <>
@@ -37,7 +38,7 @@ function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
         {bookmarks && bookmarks.length === 0 ? (
           <StyledMessage>Nothing to see here...</StyledMessage>
         ) : (
-          <Grid className="bookmarks-list" gap={1} size={width}>
+          <Grid className="bookmarks-list" gap={20} size={width}>
             {bookmarks.map((item) => (
               <BookmarkCard item={item} setActionSheetKey={setActionSheetKey} />
             ))}
@@ -79,7 +80,9 @@ function BookmarkSearchBar({ value = "", onChange }) {
   );
 }
 
-const StyledGridContainer = styled.div``;
+const StyledGridContainer = styled.div`
+  padding: 10px 10px;
+`;
 
 export default React.memo(BookmarksList);
 const StyledMessage = styled.p`
