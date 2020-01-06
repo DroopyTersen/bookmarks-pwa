@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import useCollections from "./useCollections";
 import Link from "navigation/Link";
 import Grid from "components/Grid/Grid";
 import styled from "styled-components";
@@ -9,9 +8,10 @@ import { IonButton, IonActionSheet, IonCard } from "@ionic/react";
 import Icon from "components/primitives/Icon";
 import useNavigation from "navigation/useNavigation";
 import { useFooter, useFooterCommands } from "app/Footer";
+import { useCollections } from "app/appState";
 
 function CollectionsList({}: CollectionsListProps) {
-  let { items, remove } = useCollections();
+  let { collections, remove } = useCollections();
   let { navigate } = useNavigation();
   let width = "150px";
   let height = width;
@@ -21,7 +21,7 @@ function CollectionsList({}: CollectionsListProps) {
     <>
       <StyledGridContainer>
         <StyledGrid className="collections-list" gap={1} size="150px">
-          {items.map((item) => (
+          {collections.map((item) => (
             <StyledImage
               style={{ height }}
               src={item.image}
@@ -54,7 +54,7 @@ function CollectionsList({}: CollectionsListProps) {
         New Collection
       </IonButton>
       <IonActionSheet
-        header={items.find((c) => c.key === actionSheetKey)?.title}
+        header={collections.find((c) => c.key === actionSheetKey)?.title}
         isOpen={!!actionSheetKey}
         onDidDismiss={() => setActionSheetKey("")}
         buttons={[

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useReducer, useRef } from "react";
 import Link from "navigation/Link";
 import Grid from "components/Grid/Grid";
 import styled from "styled-components";
@@ -39,7 +39,7 @@ function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
         ) : (
           <Grid className="bookmarks-list" gap={1} size={width}>
             {bookmarks.map((item) => (
-              <BookmarkCard item={item} setActionSheetKey={setActionSheetKey} />
+              <BookmarkCard key={item.key} item={item} setActionSheetKey={setActionSheetKey} />
             ))}
           </Grid>
         )}
@@ -72,10 +72,28 @@ function BookmarksList({ collectionKey, tag }: CollectionsListProps) {
 
 function BookmarkSearchBar({ value = "", onChange }) {
   console.log("TCL: BookmarkSearchBar -> value", value);
+  let elem = document.getElementById("app-header-placeholder");
+  console.log("SSearchBar", elem);
+  let ref = useRef(null);
+  const [ignored, forceUpdate] = useReducer((x) => x + 1, 0);
 
+  useEffect(() => {
+    if (!ref.current) {
+      let elem = document.getElementById("app-header-placeholder");
+      console.log("FORECE UPDATE", elem);
+      forceUpdate();
+    }
+  });
+
+  if (!elem) return null;
   return ReactDOM.createPortal(
-    <SearchBox value={value} color="light" onIonChange={(e) => onChange(e.target.value)} />,
-    document.getElementById("app-header-placeholder")
+    <SearchBox
+      ref={ref}
+      value={value}
+      color="light"
+      onIonChange={(e) => onChange(e.target.value)}
+    />,
+    elem
   );
 }
 

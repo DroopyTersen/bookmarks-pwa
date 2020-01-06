@@ -43,12 +43,10 @@ function BookmarkCard({ item, setActionSheetKey }: BookmarkCardProps) {
               </IonChip>
             ))}
           </StyledTags>
-          <Shave maxHeight={90}>{item.description}</Shave>
+          <Shave maxHeight={80}>{item.description.slice(0, 320)}</Shave>
           <div className="info">
             <div>
-              <a href={item.url} className="url monospace">
-                {parseUrl(item.url).hostname}
-              </a>
+              <span className="url monospace">{parseUrl(item.url).hostname}</span>
             </div>
             <div className="date">{format(new Date(item.created), "MM/dd/yyyy")}</div>
           </div>
@@ -94,13 +92,15 @@ const TopCaption = styled(StyledOverlay)`
   align-items: flex-start;
   text-align: left;
   justify-content: flex-start;
-  background: linear-gradient(#000000a1, #00000022);
+  /* background: linear-gradient(#000000a1, #00000022); */
+  background: linear-gradient(#000000c7, #00000063);
   padding: 10px;
   padding-top: 40px;
 `;
 
 const BottomCaption = styled(TopCaption)`
-  background: linear-gradient(#00000022 35%, #000000a1);
+  /* background: linear-gradient(#00000022 35%, #000000a1); */
+  background: linear-gradient(#ffffff00 30%, #000000b5);
   justify-content: flex-end;
   flex-direction: column;
   padding: 10px;

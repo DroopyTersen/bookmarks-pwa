@@ -1,17 +1,16 @@
 import React, { useState } from "react";
 
-import { byCreatedBy } from "fire/firestore.utils";
-import orderBy from "lodash/orderBy";
 import { useFirebase } from "fire/useFirebase";
-import { useFirestoreCollectionData, useFirestoreDocData } from "reactfire";
 import BookmarksApi, { Bookmark } from "./BookmarksApi";
 import matchSorter from "match-sorter";
+import { useGlobalBookmarks } from "app/appState";
 
 export default function useBookmarks({ collection = "", tag = "", text = "" }) {
+  let data = useGlobalBookmarks();
   let { db, currentUser } = useFirebase();
-  let query = byCreatedBy(db, "bookmarks", currentUser);
+  // let query = byCreatedBy(db, "bookmarks", currentUser);
   let api = new BookmarksApi(db, currentUser);
-  let data: Bookmark[] = useFirestoreCollectionData(query);
+  // let data: Bookmark[] = useFirestoreCollectionData(query);
   // console.log(data, collection);
   if (collection) {
     data = data.filter((b) => b.collectionKey === collection);

@@ -41,7 +41,7 @@ export const getDbItemsByUser = async function(
   return snapshot.docs.map((doc) => doc.data()) as FirebaseItem[];
 };
 
-export const byCreatedBy = function(db: FirestoreDb, collection, user: FirebaseUser) {
+export const byCreatedBy = function(db: FirestoreDb, collection: string, user: FirebaseUser) {
   if (!db || !db.collection) return null;
   let ref = db
     .collection(collection)
