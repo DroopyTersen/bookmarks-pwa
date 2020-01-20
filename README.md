@@ -1,44 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Bookmarker
 
-## Available Scripts
+`Pinterest + Pocket = Bookmarker`
 
-In the project directory, you can run:
+This app didn't need to be built, but I did it anyway. I wanted a solution that was tailor fitted to me, as well as an excuse to experiment with some new technologies.
 
-### `yarn start`
+- I was looking for something simple to help me save articles and videos for later consumption, just like [Pocket](https://app.getpocket.com/).
+- As a web developer, I was also looking for something to help me curate of all documentation, app/tools, and open source code that I find useful. I realized I was describing [Pinterest](https://www.pinterest.com/) boards.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+![Bookmarker](/docs/splash.png)
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Installing Bookmarker
 
-### `yarn test`
+Bookmarker is a Progressive Web App (PWA) you can install on your phone just by visiting the website.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+1. Go to [https://bookmarker.site](https://bookmarker.site) on your mobile phone.
+2. You will be prompted to add Bookmarker to your home screen. Do it.
 
-### `yarn build`
+Once added to the Home screen, the app will be "installed" and Bookmarker will become a "Share Target" on your phone. Now anytime you are reading an article you want to save for later, you can share it to Bookmarker.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
+![Share Target](/docs/sharetarget.png)
 
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
+## Using the Bookmarker
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- When you add a new bookmark url, Bookmarker will automatically attempt to pull in the title, description, and image for that url
+- You place bookmarks in a "Collection" (like a folder). These collections are what show on your home screen.
+- You can tag your bookmarks, then click a tag to see all bookmarks with that tag
 
-### `yarn eject`
+## Maybe someday
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+1. Chome Extension so you can quickly bookmark links when on your computer.
+2. Improve the search experience so it is easier to find the bookmark you are looking for.
