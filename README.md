@@ -2,14 +2,18 @@
 
 `Pinterest + Pocket = Bookmarker`
 
-This app didn't need to be built, but I did it anyway. I wanted a solution that was tailor fitted to me, as well as an excuse to experiment with some new technologies.
+This app didn't need to be built, but I wanted a solution that was tailor fitted to me (and an excuse to experiment with some new technologies).
 
-- I was looking for something simple to help me save articles and videos for later consumption, just like [Pocket](https://app.getpocket.com/).
-- As a web developer, I was also looking for something to help me curate of all documentation, app/tools, and open source code that I find useful. I realized I was describing [Pinterest](https://www.pinterest.com/) boards.
+As a web developer I wanted:
+
+- Something simple to help me save articles and videos for later consumption, similar to [Pocket](https://app.getpocket.com/) but without the special reading view (code snippets never show up right).
+- Something to help me curate all the documentation, app/tools, and open source code I find useful. After describing this to my GF she rolled her eyes and said, "You mean [Pinterest](https://www.pinterest.com/)?"
 
 ![Bookmarker](/docs/splash.png)
 
 ## Installing Bookmarker
+
+> **ATTENTION!!!** For now, the [Share Target](https://web.dev/web-share-target/) stuff ONLY works on **Android Chrome**.
 
 Bookmarker is a Progressive Web App (PWA) you can install on your phone just by visiting the website.
 
