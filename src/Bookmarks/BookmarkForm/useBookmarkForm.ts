@@ -84,7 +84,11 @@ export default function useSaveBookmark(initialBookmark: Bookmark) {
         dispatch({ type: "link-preview-error" });
       }
     };
-    if (state.bookmark.url && !state.bookmark.description && !state.bookmark.image) {
+    if (
+      state.bookmark.url &&
+      !state.bookmark.description &&
+      !state.bookmark.image.replace("/images/bookmark.png", "")
+    ) {
       fetchPreview();
     }
     return () => (isMounted = false);

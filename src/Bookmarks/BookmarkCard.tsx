@@ -26,6 +26,7 @@ function BookmarkCard({ item, setActionSheetKey }: BookmarkCardProps) {
     <StyledCard key={item.key}>
       <BackgroundImage style={{ height }} src={item.image} key={item.key} href={item.url}>
         <TopCaption className="slabo">{item.title}</TopCaption>
+
         <BottomCaption>
           <StyledTags className="tags">
             {item.tags.map((tag) => (
@@ -92,15 +93,15 @@ const TopCaption = styled(StyledOverlay)`
   align-items: flex-start;
   text-align: left;
   justify-content: flex-start;
+  background: radial-gradient(#0000004f, #00000099 49%, #000000d9 95%);
   /* background: linear-gradient(#000000a1, #00000022); */
-  background: linear-gradient(#000000c7, #00000063);
   padding: 10px;
   padding-top: 40px;
 `;
 
 const BottomCaption = styled(TopCaption)`
   /* background: linear-gradient(#00000022 35%, #000000a1); */
-  background: linear-gradient(#ffffff00 30%, #000000b5);
+  background: transparent;
   justify-content: flex-end;
   flex-direction: column;
   padding: 10px;
@@ -112,6 +113,7 @@ const BottomCaption = styled(TopCaption)`
 
 const StyledCard = styled(IonCard)`
   background: var(--white);
+  margin: 0;
   /* color: var(--white); */
   .info {
     display: flex;
