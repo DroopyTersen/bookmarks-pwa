@@ -33,6 +33,17 @@ Once added to the Home screen, the app will be "installed" and Bookmarker will b
 - You can tag your bookmarks, then click a tag to see all bookmarks with that tag
 - Autotagging: Bookmarker will automatically apply any existing Tags it finds in a Title or Description.
 
+## Technology Stack
+
+- Platform - PWA
+- Auth - Firebase Auth w/ Logins for Google, Facebook, and Microsoft
+- Persistence - [Cloud Firestore](https://firebase.google.com/docs/firestore)
+- Backend - NONE
+- React
+- Styled Components
+- Ionic Components
+- Web Share Target API
+
 ## Maybe someday
 
 1. Chome Extension so you can quickly bookmark links when on your computer.
