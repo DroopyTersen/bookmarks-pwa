@@ -65,14 +65,16 @@ const getInitialBookmark = async function(id, api: CollectionsApi) {
 };
 const getBookmarkFromQueryString = (url: string) => {
   let shareData = getSharedDataFromQueryString(url);
+  console.log("TCL: getBookmarkFromQueryString -> shareData", shareData);
   let sharedUrl = shareData.url || (checkIsUrl(shareData.description) ? shareData.description : "");
   const parsedUrl = new URL(url);
 
   let bookmark: Bookmark = {
-    collectionKey: parsedUrl.searchParams.get("collection"),
-    image: "/images/bookmark.png",
     title: "",
     ...shareData,
+    collectionKey: parsedUrl.searchParams.get("collection"),
+    image: "",
+    description: "",
     url: sharedUrl,
   };
   return bookmark;
@@ -83,8 +85,8 @@ const getSharedDataFromQueryString = function(url: string): ShareTargetData {
   return {
     title: parsedUrl.searchParams.get("title"),
     url: parsedUrl.searchParams.get("url"),
-    description: "",
-    // description: parsedUrl.searchParams.get("description"),
+    // description: "",
+    description: parsedUrl.searchParams.get("description"),
   };
 };
 
