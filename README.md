@@ -9,7 +9,7 @@ As a web developer I wanted:
 - Something simple to help me save articles and videos for later consumption, similar to [Pocket](https://app.getpocket.com/) but without the special reading view (code snippets never show up right).
 - Something to help me curate all the documentation, app/tools, and open source code I find useful. After describing this to my GF she rolled her eyes and said, "You mean [Pinterest](https://www.pinterest.com/)?"
 
-![Bookmarker](/docs/splash.png)
+![Bookmarker](/docs/double.png)
 
 ## Installing Bookmarker
 
