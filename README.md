@@ -29,6 +29,9 @@ Once added to the Home screen, the app will be "installed" and Bookmarker will b
 - When you add a new bookmark url, Bookmarker will automatically attempt to pull in the title, description, and image for that url
 - You place bookmarks in a "Collection" (like a folder). These collections are what show on your home screen.
 - You can tag your bookmarks, then click a tag to see all bookmarks with that tag
+- Autotagging: Bookmarker will automatically apply any existing Tags it finds in a Title or Description.
+
+![Bookmark Form](docs/save.png)
 
 ## Maybe someday
 
