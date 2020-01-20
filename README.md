@@ -4,7 +4,7 @@
 
 `Pinterest + Pocket = Bookmarker`
 
-This app didn't need to be built, but I wanted a solution that was tailor fitted to me (and an excuse to experiment with some new technologies).
+This app didn't need to be built, but was a fun excuse to experiment with new technologies.
 
 As a web developer I wanted:
 
@@ -26,7 +26,7 @@ Once added to the Home screen, the app will be "installed" and Bookmarker will b
 
 ![Share Target](/docs/sharetarget.png)
 
-## Using the Bookmarker
+## Using Bookmarker
 
 - When you add a new bookmark url, Bookmarker will automatically attempt to pull in the title, description, and image for that url
 - You place bookmarks in a "Collection" (like a folder). These collections are what show on your home screen.
