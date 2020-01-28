@@ -33,6 +33,13 @@ Once added to the Home screen, the app will be "installed" and Bookmarker will b
 - You can tag your bookmarks, then click a tag to see all bookmarks with that tag
 - Autotagging: Bookmarker will automatically apply any existing Tags it finds in a Title or Description.
 
+## Bookmarker Chrome Bookmarklet
+
+You can create a bookmark with the following code as the `url` and it will automatically pop open the new Bookmark form with the current page's url. I put mine in the the bookmark bar for easy access.
+
+```javascript
+javascript: function()%7Bwindow.open(%22https%3A%2F%2Fbookmarker.site%2Fnew%3Furl%3D%22%20%2B%20window.location.href)%7D)()
+```
 ## Technology Stack
 
 - Platform - PWA
